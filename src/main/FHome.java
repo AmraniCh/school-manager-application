@@ -94,6 +94,9 @@ public class FHome extends javax.swing.JFrame {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 MenuItemHover(evt);
             }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                MenuItemHoverExit(evt);
+            }
         });
         bAccueil.setLayout(null);
 
@@ -110,6 +113,14 @@ public class FHome extends javax.swing.JFrame {
 
         bEtu.setBackground(new java.awt.Color(233, 78, 135));
         bEtu.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        bEtu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                MenuItemHover(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                MenuItemHoverExit(evt);
+            }
+        });
         bEtu.setLayout(null);
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
@@ -125,6 +136,14 @@ public class FHome extends javax.swing.JFrame {
 
         bFil.setBackground(new java.awt.Color(233, 78, 135));
         bFil.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        bFil.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                MenuItemHover(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                MenuItemHoverExit(evt);
+            }
+        });
         bFil.setLayout(null);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
@@ -140,6 +159,14 @@ public class FHome extends javax.swing.JFrame {
 
         bDep.setBackground(new java.awt.Color(233, 78, 135));
         bDep.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        bDep.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                MenuItemHover(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                MenuItemHoverExit(evt);
+            }
+        });
         bDep.setLayout(null);
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
@@ -222,10 +249,17 @@ public class FHome extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void MenuItemHoverExit(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuItemHoverExit
+        // TODO add your handling code here:
+        JPanel panel = (JPanel) evt.getSource();  
+        
+        // Check if the components has selected ? if yes no change bg color : if no do nothing
+        if( !panel.equals(selectedMenuPanel) ) resetPanelColor((JPanel) evt.getSource());
+    }//GEN-LAST:event_MenuItemHoverExit
+
     private void MenuItemHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuItemHover
         // TODO add your handling code here:
         setPanelColor((JPanel) evt.getSource());
-
     }//GEN-LAST:event_MenuItemHover
 
     /**
