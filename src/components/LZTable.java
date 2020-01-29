@@ -27,8 +27,10 @@ public class LZTable extends JTable {
         this.setSelectionBackground(new java.awt.Color(255, 120, 172));
                 
         this.setBackground(Color.white);
-
+        
         this.setShowGrid(false);
+        
+        this.setFillsViewportHeight(true);
     }
     
     public LZTable(String[] cols, Object[][] rows){
@@ -57,9 +59,7 @@ public class LZTable extends JTable {
                 
         this.setBackground(Color.white);
 
-        this.setShowGrid(false);
-       
-     
+        this.setShowGrid(false); 
         
         
     }
