@@ -239,17 +239,58 @@ public class FHome extends javax.swing.JFrame {
                 switch(currentTable){
                     case "etudiant":
                         viewChanger(form.insertEtudiantView);
-                        //fillComboFiliere();
+                        fillComboFiliere();
                         break;
                     case "filiere":
-                        //viewChanger(form.insertFiliereView);
-                        //fillComboDept();
+                        viewChanger(form.insertFiliereView);
+                        fillComboDept();
                         break; 
                     case "departement":
-                        //viewChanger(form.insertDepartementView);
+                        viewChanger(form.insertDepartementView);
                         break;
                 }  
                 
+            }
+            
+        });
+        
+        /**
+         * UPDATE Views
+         */
+        bUpdateView.addActionListener(new ActionListener(){
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+                if( myTable.getSelectedRowCount() > 0 ){
+                    switch(currentTable){
+                        case "etudiant":
+                            viewChanger(form.updateEtudiantView);
+                            tID_UPDATE.setText(getTableData()[0]);
+                            tNom_UPDATE.setText(getTableData()[1]);
+                            tPrenom_UPDATE.setText(getTableData()[2]);
+                            tCIN_UPDATE.setText(getTableData()[3]);
+                            tAdresse_UPDATE.setText(getTableData()[4]);
+                            tEmail_UPDATE.setText(getTableData()[5]);
+                            fillComboFiliere();
+                            comboFiliere_UPDATE.setSelectedItem(getTableData()[6]);
+                            break;
+                        case "filiere":
+                            viewChanger(form.updateFiliereView);
+                            tIDFiliere_UPDATE.setText(getTableData()[0]);
+                            tIntituleFiliere_UPDATE.setText(getTableData()[1]);
+                            fillComboDept();
+                            comboDept_UPDATE.setSelectedItem(getTableData()[2]);
+                            break;
+                        case "departement":
+                            viewChanger(form.updateDepartementView);
+                            tIDDept_UPDATE.setText(getTableData()[0]);
+                            tIntituleDEPT_UPDATE.setText(getTableData()[1]);
+                            tChef_UPDATE.setText(getTableData()[2]);
+                            break;    
+
+                    }    
+                }  else showNotification("Veillez choissisez un enregistrement d'abord.");
             }
             
         });
@@ -270,6 +311,24 @@ public class FHome extends javax.swing.JFrame {
         for(int i = 0; i < rows.length; i++) {
             comboAnnees.addItem(rows[i]);
         }
+    }
+    
+    private String[] getTableData(){
+        
+        if( myTable.getRowCount() > 0 ){
+            String[] data = new String[myTable.getColumnCount()];
+
+            int row = myTable.getSelectedRow();
+
+            for (int i = 0; i < myTable.getColumnCount(); i++) {
+
+                data[i] = myTable.getModel().getValueAt(row, i).toString();
+
+            }
+            return data;
+        }
+        
+        return null;
     }
     
     private void fillDataTable(){ 
@@ -337,6 +396,30 @@ public class FHome extends javax.swing.JFrame {
         this.dynamicIcon.setIcon(new ImageIcon(getClass().getResource("/ressources/dynamicIcons/"+iconName)));
     }
     
+    private void fillComboFiliere(){
+        comboFiliere_INSERT.removeAllItems();
+        comboFiliere_UPDATE.removeAllItems();
+        comboFiliere_SEARCH.removeAllItems();
+
+        String[] rows = DBQueryHelper.getDataByColumn("filiere", "intitule_fill");
+        for(int i = 0; i < rows.length; i++) {
+            comboFiliere_INSERT.addItem(rows[i]);
+            comboFiliere_UPDATE.addItem(rows[i]);
+            comboFiliere_SEARCH.addItem(rows[i]);
+        }         
+    }
+    
+    private void fillComboDept(){
+        comboDept_INSERT.removeAllItems();
+        comboDept_UPDATE.removeAllItems();
+
+        String[] rows = DBQueryHelper.getDataByColumn("departement", "intitule_dept");
+        for(int i = 0; i < rows.length; i++) {
+            comboDept_INSERT.addItem(rows[i]);
+            comboDept_UPDATE.addItem(rows[i]);
+        }   
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -388,6 +471,118 @@ public class FHome extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         lZButton10 = new components.LZButton();
         lZButton12 = new components.LZButton();
+        updateEtudiantView = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jPanel3 = new javax.swing.JPanel();
+        tAdresse_UPDATE = new components.LZTextField();
+        lZInputLabel12 = new components.LZInputLabel();
+        lZInputLabel13 = new components.LZInputLabel();
+        tCIN_UPDATE = new components.LZTextField();
+        tNom_UPDATE = new components.LZTextField();
+        lZInputLabel14 = new components.LZInputLabel();
+        tEmail_UPDATE = new components.LZTextField();
+        tPrenom_UPDATE = new components.LZTextField();
+        tID_UPDATE = new components.LZTextField();
+        lZInputLabel15 = new components.LZInputLabel();
+        lZInputLabel16 = new components.LZInputLabel();
+        lZInputLabel17 = new components.LZInputLabel();
+        lZInputLabel18 = new components.LZInputLabel();
+        comboFiliere_UPDATE = new javax.swing.JComboBox<>();
+        jPanel4 = new javax.swing.JPanel();
+        lZButton14 = new components.LZButton();
+        lZButton15 = new components.LZButton();
+        searchEtudiantView = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jPanel5 = new javax.swing.JPanel();
+        tAdresse_SEARCH = new components.LZTextField();
+        lZInputLabel19 = new components.LZInputLabel();
+        lZInputLabel20 = new components.LZInputLabel();
+        tCIN_SEARCH = new components.LZTextField();
+        tNom_SEARCH = new components.LZTextField();
+        lZInputLabel21 = new components.LZInputLabel();
+        tEmail_SEARCH = new components.LZTextField();
+        tPrenom_SEARCH = new components.LZTextField();
+        tIDEtu_SEARCH = new components.LZTextField();
+        lZInputLabel22 = new components.LZInputLabel();
+        lZInputLabel23 = new components.LZInputLabel();
+        lZInputLabel24 = new components.LZInputLabel();
+        lZInputLabel25 = new components.LZInputLabel();
+        comboFiliere_SEARCH = new javax.swing.JComboBox<>();
+        jPanel6 = new javax.swing.JPanel();
+        lZButton16 = new components.LZButton();
+        lZButton17 = new components.LZButton();
+        insertFiliereView = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jPanel7 = new javax.swing.JPanel();
+        tIntituleFiliere_INSERT = new components.LZTextField();
+        lZInputLabel28 = new components.LZInputLabel();
+        lZTextField2 = new components.LZTextField();
+        lZInputLabel29 = new components.LZInputLabel();
+        lZInputLabel30 = new components.LZInputLabel();
+        comboDept_INSERT = new javax.swing.JComboBox<>();
+        jPanel8 = new javax.swing.JPanel();
+        lZButton18 = new components.LZButton();
+        lZButton19 = new components.LZButton();
+        updateFiliereView = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jPanel9 = new javax.swing.JPanel();
+        tIntituleFiliere_UPDATE = new components.LZTextField();
+        lZInputLabel31 = new components.LZInputLabel();
+        tIDFiliere_UPDATE = new components.LZTextField();
+        lZInputLabel32 = new components.LZInputLabel();
+        lZInputLabel33 = new components.LZInputLabel();
+        comboDept_UPDATE = new javax.swing.JComboBox<>();
+        jPanel10 = new javax.swing.JPanel();
+        lZButton20 = new components.LZButton();
+        lZButton21 = new components.LZButton();
+        searchFiliereView = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jPanel11 = new javax.swing.JPanel();
+        tIntituleFiliere_SEARCH = new components.LZTextField();
+        lZInputLabel34 = new components.LZInputLabel();
+        tIDFill_SEARCH = new components.LZTextField();
+        lZInputLabel35 = new components.LZInputLabel();
+        lZInputLabel36 = new components.LZInputLabel();
+        comboDept_SEARCH = new javax.swing.JComboBox<>();
+        jPanel12 = new javax.swing.JPanel();
+        lZButton22 = new components.LZButton();
+        lZButton23 = new components.LZButton();
+        insertDepartementView = new javax.swing.JPanel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jPanel13 = new javax.swing.JPanel();
+        tChef_INSERT = new components.LZTextField();
+        lZInputLabel37 = new components.LZInputLabel();
+        lZTextField4 = new components.LZTextField();
+        lZInputLabel38 = new components.LZInputLabel();
+        lZInputLabel39 = new components.LZInputLabel();
+        tIntituleDEPT_INSERT = new components.LZTextField();
+        jPanel14 = new javax.swing.JPanel();
+        lZButton24 = new components.LZButton();
+        lZButton25 = new components.LZButton();
+        updateDepartementView = new javax.swing.JPanel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        jPanel15 = new javax.swing.JPanel();
+        tChef_UPDATE = new components.LZTextField();
+        lZInputLabel40 = new components.LZInputLabel();
+        tIDDept_UPDATE = new components.LZTextField();
+        lZInputLabel41 = new components.LZInputLabel();
+        lZInputLabel42 = new components.LZInputLabel();
+        tIntituleDEPT_UPDATE = new components.LZTextField();
+        jPanel16 = new javax.swing.JPanel();
+        lZButton26 = new components.LZButton();
+        lZButton27 = new components.LZButton();
+        searchDepartementView = new javax.swing.JPanel();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        jPanel17 = new javax.swing.JPanel();
+        tChef_UPDATE1 = new components.LZTextField();
+        lZInputLabel43 = new components.LZInputLabel();
+        tIDDept_UPDATE1 = new components.LZTextField();
+        lZInputLabel44 = new components.LZInputLabel();
+        lZInputLabel45 = new components.LZInputLabel();
+        tIntituleDEPT_UPDATE1 = new components.LZTextField();
+        jPanel18 = new javax.swing.JPanel();
+        lZButton28 = new components.LZButton();
+        lZButton29 = new components.LZButton();
         leftPanel = new javax.swing.JPanel();
         bAccueil = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -638,7 +833,7 @@ public class FHome extends javax.swing.JFrame {
                     .addComponent(lZInputLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tPrenom_INSERT, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lZInputLabel11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 183, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tCIN_INSERT, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tAdresse_INSERT, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -686,14 +881,24 @@ public class FHome extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(jPanel1);
 
-        insertEtudiantView.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, 230));
+        insertEtudiantView.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, 230));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         lZButton10.setBackground(new java.awt.Color(38, 46, 60));
         lZButton10.setText("Annuler");
+        lZButton10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                CancelClickEvent(evt);
+            }
+        });
 
         lZButton12.setBackground(new java.awt.Color(28, 104, 150));
+        lZButton12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                bInsertMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -703,7 +908,7 @@ public class FHome extends javax.swing.JFrame {
                 .addComponent(lZButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lZButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 401, Short.MAX_VALUE))
+                .addGap(0, 461, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -715,7 +920,846 @@ public class FHome extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        insertEtudiantView.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 650, 50));
+        insertEtudiantView.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 710, 50));
+
+        updateEtudiantView.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jScrollPane2.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane2.setBorder(null);
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+
+        tAdresse_UPDATE.setText("Adresse");
+
+        lZInputLabel12.setText("Adresse :");
+
+        lZInputLabel13.setText("CIN :");
+
+        tCIN_UPDATE.setText("CIN");
+
+        tNom_UPDATE.setText("Nom");
+
+        lZInputLabel14.setText("Filière :");
+
+        tEmail_UPDATE.setText("Email");
+
+        tPrenom_UPDATE.setText("Prénom");
+
+        tID_UPDATE.setText("L'identifiant");
+        tID_UPDATE.setEenabled(false);
+
+        lZInputLabel15.setText("Nom :");
+
+        lZInputLabel16.setText("ID :");
+
+        lZInputLabel17.setText("Email : ");
+
+        lZInputLabel18.setText("Prénom :");
+
+        comboFiliere_UPDATE.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        comboFiliere_UPDATE.setForeground(new java.awt.Color(85, 85, 85));
+        comboFiliere_UPDATE.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboFiliere_UPDATE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboFiliere_UPDATEActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(comboFiliere_UPDATE, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lZInputLabel16, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tID_UPDATE, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lZInputLabel15, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tNom_UPDATE, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lZInputLabel14, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tPrenom_UPDATE, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lZInputLabel18, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 183, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tCIN_UPDATE, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tAdresse_UPDATE, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tEmail_UPDATE, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lZInputLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lZInputLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lZInputLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lZInputLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lZInputLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tID_UPDATE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tCIN_UPDATE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lZInputLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lZInputLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tNom_UPDATE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tAdresse_UPDATE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(lZInputLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lZInputLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tPrenom_UPDATE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tEmail_UPDATE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lZInputLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(comboFiliere_UPDATE)
+                .addContainerGap())
+        );
+
+        jScrollPane2.setViewportView(jPanel3);
+
+        updateEtudiantView.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, 230));
+
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+
+        lZButton14.setBackground(new java.awt.Color(38, 46, 60));
+        lZButton14.setText("Annuler");
+        lZButton14.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                CancelClickEvent(evt);
+            }
+        });
+
+        lZButton15.setBackground(new java.awt.Color(39, 187, 216));
+        lZButton15.setText("Modifier");
+        lZButton15.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                bUpdateMousePressed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addComponent(lZButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lZButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 461, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lZButton14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lZButton15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        updateEtudiantView.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 710, 50));
+
+        searchEtudiantView.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jScrollPane3.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane3.setBorder(null);
+
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+
+        tAdresse_SEARCH.setText("Adresse");
+
+        lZInputLabel19.setText("Adresse :");
+
+        lZInputLabel20.setText("CIN :");
+
+        tCIN_SEARCH.setText("CIN");
+
+        tNom_SEARCH.setText("Nom");
+
+        lZInputLabel21.setText("Filière :");
+
+        tEmail_SEARCH.setText("Email");
+
+        tPrenom_SEARCH.setText("Prénom");
+
+        tIDEtu_SEARCH.setText("L'identifiant");
+
+        lZInputLabel22.setText("Nom :");
+
+        lZInputLabel23.setText("ID :");
+
+        lZInputLabel24.setText("Email : ");
+
+        lZInputLabel25.setText("Prénom :");
+
+        comboFiliere_SEARCH.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        comboFiliere_SEARCH.setForeground(new java.awt.Color(85, 85, 85));
+        comboFiliere_SEARCH.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboFiliere_SEARCH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboFiliere_SEARCHActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(comboFiliere_SEARCH, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lZInputLabel23, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tIDEtu_SEARCH, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lZInputLabel22, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tNom_SEARCH, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lZInputLabel21, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tPrenom_SEARCH, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lZInputLabel25, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 183, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tCIN_SEARCH, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tAdresse_SEARCH, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tEmail_SEARCH, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lZInputLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lZInputLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lZInputLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lZInputLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lZInputLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tIDEtu_SEARCH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tCIN_SEARCH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lZInputLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lZInputLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tNom_SEARCH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tAdresse_SEARCH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(lZInputLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lZInputLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tPrenom_SEARCH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tEmail_SEARCH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lZInputLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(comboFiliere_SEARCH)
+                .addContainerGap())
+        );
+
+        jScrollPane3.setViewportView(jPanel5);
+
+        searchEtudiantView.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, 230));
+
+        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+
+        lZButton16.setBackground(new java.awt.Color(38, 46, 60));
+        lZButton16.setText("Annuler");
+
+        lZButton17.setBackground(new java.awt.Color(39, 187, 216));
+        lZButton17.setText("Rechercher");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addComponent(lZButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lZButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 451, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lZButton16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lZButton17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        searchEtudiantView.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 710, 50));
+
+        insertFiliereView.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jScrollPane4.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane4.setBorder(null);
+
+        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
+
+        tIntituleFiliere_INSERT.setText("Intitulé");
+
+        lZInputLabel28.setText("Filière :");
+
+        lZTextField2.setText("L'identifiant");
+        lZTextField2.setEenabled(false);
+
+        lZInputLabel29.setText("Intitulé :");
+
+        lZInputLabel30.setText("ID :");
+
+        comboDept_INSERT.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        comboDept_INSERT.setForeground(new java.awt.Color(85, 85, 85));
+        comboDept_INSERT.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(comboDept_INSERT, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lZInputLabel30, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lZTextField2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lZInputLabel29, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tIntituleFiliere_INSERT, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lZInputLabel28, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(443, Short.MAX_VALUE))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addComponent(lZInputLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addComponent(lZTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addComponent(lZInputLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addComponent(tIntituleFiliere_INSERT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lZInputLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(comboDept_INSERT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(77, Short.MAX_VALUE))
+        );
+
+        jScrollPane4.setViewportView(jPanel7);
+
+        insertFiliereView.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, 230));
+
+        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
+
+        lZButton18.setBackground(new java.awt.Color(38, 46, 60));
+        lZButton18.setText("Annuler");
+        lZButton18.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                CancelClickEvent(evt);
+            }
+        });
+
+        lZButton19.setBackground(new java.awt.Color(28, 104, 150));
+        lZButton19.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                bInsertMousePressed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addComponent(lZButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lZButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 461, Short.MAX_VALUE))
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lZButton18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lZButton19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        insertFiliereView.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 710, 50));
+
+        updateFiliereView.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jScrollPane5.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane5.setBorder(null);
+
+        jPanel9.setBackground(new java.awt.Color(255, 255, 255));
+
+        tIntituleFiliere_UPDATE.setText("Intitulé");
+
+        lZInputLabel31.setText("Filière :");
+
+        tIDFiliere_UPDATE.setText("L'identifiant");
+        tIDFiliere_UPDATE.setEenabled(false);
+
+        lZInputLabel32.setText("Intitulé :");
+
+        lZInputLabel33.setText("ID :");
+
+        comboDept_UPDATE.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        comboDept_UPDATE.setForeground(new java.awt.Color(85, 85, 85));
+        comboDept_UPDATE.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(comboDept_UPDATE, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lZInputLabel33, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tIDFiliere_UPDATE, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lZInputLabel32, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tIntituleFiliere_UPDATE, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lZInputLabel31, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(443, Short.MAX_VALUE))
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addComponent(lZInputLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addComponent(tIDFiliere_UPDATE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addComponent(lZInputLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addComponent(tIntituleFiliere_UPDATE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lZInputLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(comboDept_UPDATE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(77, Short.MAX_VALUE))
+        );
+
+        jScrollPane5.setViewportView(jPanel9);
+
+        updateFiliereView.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, 230));
+
+        jPanel10.setBackground(new java.awt.Color(255, 255, 255));
+
+        lZButton20.setBackground(new java.awt.Color(38, 46, 60));
+        lZButton20.setText("Annuler");
+        lZButton20.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                CancelClickEvent(evt);
+            }
+        });
+
+        lZButton21.setBackground(new java.awt.Color(39, 187, 216));
+        lZButton21.setText("Modifier");
+        lZButton21.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                bUpdateMousePressed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addComponent(lZButton21, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lZButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 461, Short.MAX_VALUE))
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lZButton20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lZButton21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        updateFiliereView.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 710, 50));
+
+        searchFiliereView.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jScrollPane6.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane6.setBorder(null);
+
+        jPanel11.setBackground(new java.awt.Color(255, 255, 255));
+
+        tIntituleFiliere_SEARCH.setText("Intitulé");
+
+        lZInputLabel34.setText("Filière :");
+
+        tIDFill_SEARCH.setText("L'identifiant");
+
+        lZInputLabel35.setText("Intitulé :");
+
+        lZInputLabel36.setText("ID :");
+
+        comboDept_SEARCH.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        comboDept_SEARCH.setForeground(new java.awt.Color(85, 85, 85));
+        comboDept_SEARCH.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(comboDept_SEARCH, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lZInputLabel36, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tIDFill_SEARCH, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lZInputLabel35, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tIntituleFiliere_SEARCH, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lZInputLabel34, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(443, Short.MAX_VALUE))
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addComponent(lZInputLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addComponent(tIDFill_SEARCH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addComponent(lZInputLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addComponent(tIntituleFiliere_SEARCH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lZInputLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(comboDept_SEARCH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(77, Short.MAX_VALUE))
+        );
+
+        jScrollPane6.setViewportView(jPanel11);
+
+        searchFiliereView.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, 230));
+
+        jPanel12.setBackground(new java.awt.Color(255, 255, 255));
+
+        lZButton22.setBackground(new java.awt.Color(38, 46, 60));
+        lZButton22.setText("Annuler");
+
+        lZButton23.setBackground(new java.awt.Color(39, 187, 216));
+        lZButton23.setText("Rechercher");
+
+        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        jPanel12.setLayout(jPanel12Layout);
+        jPanel12Layout.setHorizontalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addComponent(lZButton23, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lZButton22, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 448, Short.MAX_VALUE))
+        );
+        jPanel12Layout.setVerticalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lZButton22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lZButton23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        searchFiliereView.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 710, 50));
+
+        insertDepartementView.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                CancelClickEvent(evt);
+            }
+        });
+        insertDepartementView.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jScrollPane7.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane7.setBorder(null);
+
+        jPanel13.setBackground(new java.awt.Color(255, 255, 255));
+
+        tChef_INSERT.setText("Chef de département");
+
+        lZInputLabel37.setText("Chef de département : ");
+
+        lZTextField4.setText("L'identifiant");
+        lZTextField4.setEenabled(false);
+
+        lZInputLabel38.setText("Intitulé :");
+
+        lZInputLabel39.setText("ID :");
+
+        tIntituleDEPT_INSERT.setText("Intitulé");
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(lZInputLabel39, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lZTextField4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lZInputLabel38, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tChef_INSERT, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lZInputLabel37, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tIntituleDEPT_INSERT, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(443, Short.MAX_VALUE))
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addComponent(lZInputLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addComponent(lZTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addComponent(lZInputLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
+                .addComponent(tIntituleDEPT_INSERT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lZInputLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(tChef_INSERT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(64, Short.MAX_VALUE))
+        );
+
+        jScrollPane7.setViewportView(jPanel13);
+
+        insertDepartementView.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, 230));
+
+        jPanel14.setBackground(new java.awt.Color(255, 255, 255));
+
+        lZButton24.setBackground(new java.awt.Color(38, 46, 60));
+        lZButton24.setText("Annuler");
+        lZButton24.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                CancelClickEvent(evt);
+            }
+        });
+
+        lZButton25.setBackground(new java.awt.Color(28, 104, 150));
+        lZButton25.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                bInsertMousePressed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
+        jPanel14.setLayout(jPanel14Layout);
+        jPanel14Layout.setHorizontalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addComponent(lZButton25, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lZButton24, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 461, Short.MAX_VALUE))
+        );
+        jPanel14Layout.setVerticalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lZButton24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lZButton25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        insertDepartementView.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 710, 50));
+
+        updateDepartementView.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jScrollPane8.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane8.setBorder(null);
+
+        jPanel15.setBackground(new java.awt.Color(255, 255, 255));
+
+        tChef_UPDATE.setText("Chef de département");
+
+        lZInputLabel40.setText("Chef de département : ");
+
+        tIDDept_UPDATE.setText("L'identifiant");
+
+        lZInputLabel41.setText("Intitulé :");
+
+        lZInputLabel42.setText("ID :");
+
+        tIntituleDEPT_UPDATE.setText("Intitulé");
+
+        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
+        jPanel15.setLayout(jPanel15Layout);
+        jPanel15Layout.setHorizontalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel15Layout.createSequentialGroup()
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(lZInputLabel42, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tIDDept_UPDATE, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lZInputLabel41, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tChef_UPDATE, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lZInputLabel40, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tIntituleDEPT_UPDATE, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(443, Short.MAX_VALUE))
+        );
+        jPanel15Layout.setVerticalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel15Layout.createSequentialGroup()
+                .addComponent(lZInputLabel42, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addComponent(tIDDept_UPDATE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addComponent(lZInputLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
+                .addComponent(tIntituleDEPT_UPDATE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lZInputLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(tChef_UPDATE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(64, Short.MAX_VALUE))
+        );
+
+        jScrollPane8.setViewportView(jPanel15);
+
+        updateDepartementView.add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, 230));
+
+        jPanel16.setBackground(new java.awt.Color(255, 255, 255));
+
+        lZButton26.setBackground(new java.awt.Color(38, 46, 60));
+        lZButton26.setText("Annuler");
+        lZButton26.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                CancelClickEvent(evt);
+            }
+        });
+
+        lZButton27.setBackground(new java.awt.Color(39, 187, 216));
+        lZButton27.setText("Modifier");
+        lZButton27.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                bUpdateMousePressed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
+        jPanel16.setLayout(jPanel16Layout);
+        jPanel16Layout.setHorizontalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel16Layout.createSequentialGroup()
+                .addComponent(lZButton27, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lZButton26, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 437, Short.MAX_VALUE))
+        );
+        jPanel16Layout.setVerticalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel16Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lZButton26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lZButton27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        updateDepartementView.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 710, 50));
+
+        searchDepartementView.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jScrollPane9.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane9.setBorder(null);
+
+        jPanel17.setBackground(new java.awt.Color(255, 255, 255));
+
+        tChef_UPDATE1.setText("Chef de département");
+
+        lZInputLabel43.setText("Chef de département : ");
+
+        tIDDept_UPDATE1.setText("L'identifiant");
+
+        lZInputLabel44.setText("Intitulé :");
+
+        lZInputLabel45.setText("ID :");
+
+        tIntituleDEPT_UPDATE1.setText("Intitulé");
+
+        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
+        jPanel17.setLayout(jPanel17Layout);
+        jPanel17Layout.setHorizontalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel17Layout.createSequentialGroup()
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(lZInputLabel45, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tIDDept_UPDATE1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lZInputLabel44, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tChef_UPDATE1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lZInputLabel43, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tIntituleDEPT_UPDATE1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(443, Short.MAX_VALUE))
+        );
+        jPanel17Layout.setVerticalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel17Layout.createSequentialGroup()
+                .addComponent(lZInputLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addComponent(tIDDept_UPDATE1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addComponent(lZInputLabel44, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
+                .addComponent(tIntituleDEPT_UPDATE1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lZInputLabel43, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(tChef_UPDATE1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(64, Short.MAX_VALUE))
+        );
+
+        jScrollPane9.setViewportView(jPanel17);
+
+        searchDepartementView.add(jScrollPane9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, 230));
+
+        jPanel18.setBackground(new java.awt.Color(255, 255, 255));
+
+        lZButton28.setBackground(new java.awt.Color(38, 46, 60));
+        lZButton28.setText("Annuler");
+
+        lZButton29.setBackground(new java.awt.Color(39, 187, 216));
+        lZButton29.setText("Rechercher");
+
+        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
+        jPanel18.setLayout(jPanel18Layout);
+        jPanel18Layout.setHorizontalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel18Layout.createSequentialGroup()
+                .addComponent(lZButton29, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lZButton28, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 444, Short.MAX_VALUE))
+        );
+        jPanel18Layout.setVerticalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel18Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lZButton28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lZButton29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        searchDepartementView.add(jPanel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 710, 50));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(0, 0));
@@ -1158,6 +2202,115 @@ public class FHome extends javax.swing.JFrame {
         setTitleIcon("Suppression d'une année scolaire.", "warning.png");
     }//GEN-LAST:event_bShowConfirmationMousePressed
 
+    private void comboFiliere_UPDATEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboFiliere_UPDATEActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboFiliere_UPDATEActionPerformed
+
+    private void comboFiliere_SEARCHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboFiliere_SEARCHActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboFiliere_SEARCHActionPerformed
+
+    private void bInsertMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bInsertMousePressed
+        // TODO add your handling code here:
+        switch(currentTable){
+            case "etudiant":
+                if(DBQueryHelper.insert(currentTable, new String[][]{
+                    {
+                        null,
+                        tNom_INSERT.getText(),
+                        tPrenom_INSERT.getText(),
+                        tCIN_INSERT.getText(),
+                        tAdresse_INSERT.getText(),
+                        tEmail_INSERT.getText(),
+                        comboFiliere_INSERT.getSelectedItem().toString()
+                    }
+                })){
+                    showNotification("L'étudiant ajouté avec succés!");
+                    fillDataTable();
+                }
+                break;
+            case "filiere":
+                if(DBQueryHelper.insert(currentTable, new String[][]{
+                    {
+                        null,
+                        tIntituleFiliere_INSERT.getText(),
+                        comboDept_INSERT.getSelectedItem().toString()
+                    }
+                })){
+                    showNotification("Filière ajouté avec succés!");
+                    fillDataTable();
+                }
+                break;
+            case "departement":
+                boolean insert_dept = DBQueryHelper.insert(currentTable, new String[][]{
+                    {
+                        null,
+                        tIntituleDEPT_INSERT.getText(),
+                        tChef_INSERT.getText()
+                    }
+                });
+                boolean insert_annee_dept = DBQueryHelper.insert("annee_departement", new String[][]{
+                    {
+                        tIntituleDEPT_INSERT.getText(),
+                        String.valueOf(currentAnnee)
+                    }
+                });
+                
+                if( insert_dept && insert_annee_dept ){
+                    showNotification("Département ajouté avec succés!");
+                    fillDataTable();
+                }
+                
+                break;
+        }
+        
+        updateCounters();
+    }//GEN-LAST:event_bInsertMousePressed
+
+    private void bUpdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bUpdateMousePressed
+        // TODO add your handling code here:
+        switch(currentTable){
+            case "etudiant":
+                if(DBQueryHelper.updateRow(currentTable, new String[]
+                    {
+                        tID_UPDATE.getText(),
+                        tNom_UPDATE.getText(),
+                        tPrenom_UPDATE.getText(),
+                        tCIN_UPDATE.getText(),
+                        tAdresse_UPDATE.getText(),
+                        tEmail_UPDATE.getText(),
+                        comboFiliere_UPDATE.getSelectedItem().toString()
+                    })){   
+                        showNotification("L'étudiant à été modifié avec succès!");
+                    }
+                break;
+            case "filiere":
+                if(DBQueryHelper.updateRow(currentTable, new String[]
+                    {
+                        tIDFiliere_UPDATE.getText(),
+                        tIntituleFiliere_UPDATE.getText(),
+                        comboDept_UPDATE.getSelectedItem().toString()
+                    }
+                    )){
+                        showNotification("Filière à été modifié avec succès!");
+                    }
+                break;
+            case "departement":
+                if(DBQueryHelper.updateRow(currentTable, new String[]
+                    {
+                        tIDDept_UPDATE.getText(),
+                        tIntituleDEPT_UPDATE.getText(),
+                        tChef_UPDATE.getText()
+                    }
+                    )){
+                        showNotification("L'étudiant à été modifié avec succès!");
+                    }
+                break;
+        }  
+        
+        fillDataTable();
+    }//GEN-LAST:event_bUpdateMousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -1206,7 +2359,12 @@ public class FHome extends javax.swing.JFrame {
     private javax.swing.JLabel bShowConfirmation;
     private components.LZButton bUpdateView;
     private components.LZComboBox comboAnnees;
+    private javax.swing.JComboBox<String> comboDept_INSERT;
+    private javax.swing.JComboBox<String> comboDept_SEARCH;
+    private javax.swing.JComboBox<String> comboDept_UPDATE;
     private javax.swing.JComboBox<String> comboFiliere_INSERT;
+    private javax.swing.JComboBox<String> comboFiliere_SEARCH;
+    private javax.swing.JComboBox<String> comboFiliere_UPDATE;
     private javax.swing.JPanel components;
     private javax.swing.JPanel confirmationPanel;
     private javax.swing.JPanel container;
@@ -1214,7 +2372,9 @@ public class FHome extends javax.swing.JFrame {
     private javax.swing.JLabel dynamicIcon;
     private javax.swing.JPanel dynamicTable;
     private javax.swing.JLabel dynamicTitle;
+    private javax.swing.JPanel insertDepartementView;
     private javax.swing.JPanel insertEtudiantView;
+    private javax.swing.JPanel insertFiliereView;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel13;
@@ -1229,8 +2389,32 @@ public class FHome extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel17;
+    private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JSeparator jSeparator1;
     private keeptoo.KButton kButton1;
     private keeptoo.KGradientPanel kGradientPanel1;
@@ -1245,6 +2429,22 @@ public class FHome extends javax.swing.JFrame {
     private components.LZButton lZButton11;
     private components.LZButton lZButton12;
     private components.LZButton lZButton13;
+    private components.LZButton lZButton14;
+    private components.LZButton lZButton15;
+    private components.LZButton lZButton16;
+    private components.LZButton lZButton17;
+    private components.LZButton lZButton18;
+    private components.LZButton lZButton19;
+    private components.LZButton lZButton20;
+    private components.LZButton lZButton21;
+    private components.LZButton lZButton22;
+    private components.LZButton lZButton23;
+    private components.LZButton lZButton24;
+    private components.LZButton lZButton25;
+    private components.LZButton lZButton26;
+    private components.LZButton lZButton27;
+    private components.LZButton lZButton28;
+    private components.LZButton lZButton29;
     private components.LZButton lZButton5;
     private components.LZButton lZButton6;
     private components.LZButton lZButton7;
@@ -1252,26 +2452,91 @@ public class FHome extends javax.swing.JFrame {
     private components.LZInputLabel lZInputLabel1;
     private components.LZInputLabel lZInputLabel10;
     private components.LZInputLabel lZInputLabel11;
+    private components.LZInputLabel lZInputLabel12;
+    private components.LZInputLabel lZInputLabel13;
+    private components.LZInputLabel lZInputLabel14;
+    private components.LZInputLabel lZInputLabel15;
+    private components.LZInputLabel lZInputLabel16;
+    private components.LZInputLabel lZInputLabel17;
+    private components.LZInputLabel lZInputLabel18;
+    private components.LZInputLabel lZInputLabel19;
     private components.LZInputLabel lZInputLabel2;
+    private components.LZInputLabel lZInputLabel20;
+    private components.LZInputLabel lZInputLabel21;
+    private components.LZInputLabel lZInputLabel22;
+    private components.LZInputLabel lZInputLabel23;
+    private components.LZInputLabel lZInputLabel24;
+    private components.LZInputLabel lZInputLabel25;
+    private components.LZInputLabel lZInputLabel28;
+    private components.LZInputLabel lZInputLabel29;
     private components.LZInputLabel lZInputLabel3;
+    private components.LZInputLabel lZInputLabel30;
+    private components.LZInputLabel lZInputLabel31;
+    private components.LZInputLabel lZInputLabel32;
+    private components.LZInputLabel lZInputLabel33;
+    private components.LZInputLabel lZInputLabel34;
+    private components.LZInputLabel lZInputLabel35;
+    private components.LZInputLabel lZInputLabel36;
+    private components.LZInputLabel lZInputLabel37;
+    private components.LZInputLabel lZInputLabel38;
+    private components.LZInputLabel lZInputLabel39;
     private components.LZInputLabel lZInputLabel4;
+    private components.LZInputLabel lZInputLabel40;
+    private components.LZInputLabel lZInputLabel41;
+    private components.LZInputLabel lZInputLabel42;
+    private components.LZInputLabel lZInputLabel43;
+    private components.LZInputLabel lZInputLabel44;
+    private components.LZInputLabel lZInputLabel45;
     private components.LZInputLabel lZInputLabel5;
     private components.LZInputLabel lZInputLabel6;
     private components.LZInputLabel lZInputLabel7;
     private components.LZInputLabel lZInputLabel8;
     private components.LZInputLabel lZInputLabel9;
     private components.LZTextField lZTextField1;
+    private components.LZTextField lZTextField2;
+    private components.LZTextField lZTextField4;
     private javax.swing.JPanel leftPanel;
     private javax.swing.JPanel logsView;
     private javax.swing.JPanel notificationPanel;
     private javax.swing.JPanel rightPanel;
+    private javax.swing.JPanel searchDepartementView;
+    private javax.swing.JPanel searchEtudiantView;
+    private javax.swing.JPanel searchFiliereView;
     private components.LZTextField tAdresse_INSERT;
+    private components.LZTextField tAdresse_SEARCH;
+    private components.LZTextField tAdresse_UPDATE;
     private components.LZTextField tCIN_INSERT;
+    private components.LZTextField tCIN_SEARCH;
+    private components.LZTextField tCIN_UPDATE;
+    private components.LZTextField tChef_INSERT;
+    private components.LZTextField tChef_UPDATE;
+    private components.LZTextField tChef_UPDATE1;
     private components.LZTextField tEmail_INSERT;
+    private components.LZTextField tEmail_SEARCH;
+    private components.LZTextField tEmail_UPDATE;
+    private components.LZTextField tIDDept_UPDATE;
+    private components.LZTextField tIDDept_UPDATE1;
+    private components.LZTextField tIDEtu_SEARCH;
+    private components.LZTextField tIDFiliere_UPDATE;
+    private components.LZTextField tIDFill_SEARCH;
+    private components.LZTextField tID_UPDATE;
+    private components.LZTextField tIntituleDEPT_INSERT;
+    private components.LZTextField tIntituleDEPT_UPDATE;
+    private components.LZTextField tIntituleDEPT_UPDATE1;
+    private components.LZTextField tIntituleFiliere_INSERT;
+    private components.LZTextField tIntituleFiliere_SEARCH;
+    private components.LZTextField tIntituleFiliere_UPDATE;
     private components.LZTextField tNom_INSERT;
+    private components.LZTextField tNom_SEARCH;
+    private components.LZTextField tNom_UPDATE;
     private components.LZTextField tPrenom_INSERT;
+    private components.LZTextField tPrenom_SEARCH;
+    private components.LZTextField tPrenom_UPDATE;
     private javax.swing.JPanel tableButtons;
     private javax.swing.JPanel tableView;
+    private javax.swing.JPanel updateDepartementView;
+    private javax.swing.JPanel updateEtudiantView;
+    private javax.swing.JPanel updateFiliereView;
     private javax.swing.JPanel viewChangerPanel;
     // End of variables declaration//GEN-END:variables
 }
