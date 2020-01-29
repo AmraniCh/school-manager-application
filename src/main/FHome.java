@@ -64,7 +64,7 @@ public class FHome extends javax.swing.JFrame {
         
         currentAnnee = Integer.parseInt(comboAnnees.getSelectedItem().toString()); // Set currentAnnee gloabal variable
         
-        viewChanger(this.tableView);
+        viewChanger(this.logsView);
         
         FHome form = this; // Store actual form to use in mouse adapter interface
 
@@ -295,6 +295,34 @@ public class FHome extends javax.swing.JFrame {
             
         });
         
+        /**
+         * Search Views
+         */
+        bSearchView.addActionListener(new ActionListener(){
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+                switch(currentTable){
+                    case "etudiant":
+                        viewChanger(form.searchEtudiantView);
+                        fillComboFiliere();
+                        break;
+                    case "filiere":
+                        viewChanger(form.searchFiliereView);
+                        fillComboDept();
+                        break;
+                    case "departement":
+                        viewChanger(form.searchDepartementView);
+                        break;    
+                    
+                }  
+            }
+        });
+        
+        // Center form to screen
+        this.setLocationRelativeTo(null);
+        
     }
     
     private void updateCounters(){
@@ -441,7 +469,7 @@ public class FHome extends javax.swing.JFrame {
         tableButtons = new javax.swing.JPanel();
         bInsertView = new components.LZButton();
         bUpdateView = new components.LZButton();
-        lZButton11 = new components.LZButton();
+        bSearchView = new components.LZButton();
         bDelete = new components.LZButton();
         logsView = new javax.swing.JPanel();
         lZInputLabel1 = new components.LZInputLabel();
@@ -574,12 +602,12 @@ public class FHome extends javax.swing.JFrame {
         searchDepartementView = new javax.swing.JPanel();
         jScrollPane9 = new javax.swing.JScrollPane();
         jPanel17 = new javax.swing.JPanel();
-        tChef_UPDATE1 = new components.LZTextField();
+        tChef_SEARCH = new components.LZTextField();
         lZInputLabel43 = new components.LZInputLabel();
-        tIDDept_UPDATE1 = new components.LZTextField();
+        tIDDept_SEARCH = new components.LZTextField();
         lZInputLabel44 = new components.LZInputLabel();
         lZInputLabel45 = new components.LZInputLabel();
-        tIntituleDEPT_UPDATE1 = new components.LZTextField();
+        tIntituleDept_SEARCH = new components.LZTextField();
         jPanel18 = new javax.swing.JPanel();
         lZButton28 = new components.LZButton();
         lZButton29 = new components.LZButton();
@@ -667,8 +695,8 @@ public class FHome extends javax.swing.JFrame {
         bUpdateView.setBackground(new java.awt.Color(39, 187, 216));
         bUpdateView.setText("Modifier");
 
-        lZButton11.setBackground(new java.awt.Color(28, 104, 150));
-        lZButton11.setText("Rechercher");
+        bSearchView.setBackground(new java.awt.Color(28, 104, 150));
+        bSearchView.setText("Rechercher");
 
         bDelete.setText("Supprimer");
 
@@ -684,7 +712,7 @@ public class FHome extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
                 .addComponent(bDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(54, 54, 54)
-                .addComponent(lZButton11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(bSearchView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(43, 43, 43))
         );
         tableButtonsLayout.setVerticalGroup(
@@ -694,7 +722,7 @@ public class FHome extends javax.swing.JFrame {
                 .addGroup(tableButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bInsertView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bUpdateView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lZButton11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bSearchView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
@@ -1179,9 +1207,19 @@ public class FHome extends javax.swing.JFrame {
 
         lZButton16.setBackground(new java.awt.Color(38, 46, 60));
         lZButton16.setText("Annuler");
+        lZButton16.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                CancelClickEvent(evt);
+            }
+        });
 
         lZButton17.setBackground(new java.awt.Color(39, 187, 216));
         lZButton17.setText("Rechercher");
+        lZButton17.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                bSearchMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -1458,9 +1496,19 @@ public class FHome extends javax.swing.JFrame {
 
         lZButton22.setBackground(new java.awt.Color(38, 46, 60));
         lZButton22.setText("Annuler");
+        lZButton22.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                CancelClickEvent(evt);
+            }
+        });
 
         lZButton23.setBackground(new java.awt.Color(39, 187, 216));
         lZButton23.setText("Rechercher");
+        lZButton23.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                bSearchMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
@@ -1684,17 +1732,17 @@ public class FHome extends javax.swing.JFrame {
 
         jPanel17.setBackground(new java.awt.Color(255, 255, 255));
 
-        tChef_UPDATE1.setText("Chef de département");
+        tChef_SEARCH.setText("Chef de département");
 
         lZInputLabel43.setText("Chef de département : ");
 
-        tIDDept_UPDATE1.setText("L'identifiant");
+        tIDDept_SEARCH.setText("L'identifiant");
 
         lZInputLabel44.setText("Intitulé :");
 
         lZInputLabel45.setText("ID :");
 
-        tIntituleDEPT_UPDATE1.setText("Intitulé");
+        tIntituleDept_SEARCH.setText("Intitulé");
 
         javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
         jPanel17.setLayout(jPanel17Layout);
@@ -1703,11 +1751,11 @@ public class FHome extends javax.swing.JFrame {
             .addGroup(jPanel17Layout.createSequentialGroup()
                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(lZInputLabel45, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tIDDept_UPDATE1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tIDDept_SEARCH, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lZInputLabel44, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tChef_UPDATE1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tChef_SEARCH, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lZInputLabel43, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tIntituleDEPT_UPDATE1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(tIntituleDept_SEARCH, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(443, Short.MAX_VALUE))
         );
         jPanel17Layout.setVerticalGroup(
@@ -1715,15 +1763,15 @@ public class FHome extends javax.swing.JFrame {
             .addGroup(jPanel17Layout.createSequentialGroup()
                 .addComponent(lZInputLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(8, 8, 8)
-                .addComponent(tIDDept_UPDATE1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tIDDept_SEARCH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(8, 8, 8)
                 .addComponent(lZInputLabel44, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(13, 13, 13)
-                .addComponent(tIntituleDEPT_UPDATE1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tIntituleDept_SEARCH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lZInputLabel43, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tChef_UPDATE1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tChef_SEARCH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(64, Short.MAX_VALUE))
         );
 
@@ -1735,9 +1783,19 @@ public class FHome extends javax.swing.JFrame {
 
         lZButton28.setBackground(new java.awt.Color(38, 46, 60));
         lZButton28.setText("Annuler");
+        lZButton28.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                CancelClickEvent(evt);
+            }
+        });
 
         lZButton29.setBackground(new java.awt.Color(39, 187, 216));
         lZButton29.setText("Rechercher");
+        lZButton29.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                bSearchMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
         jPanel18.setLayout(jPanel18Layout);
@@ -2311,6 +2369,57 @@ public class FHome extends javax.swing.JFrame {
         fillDataTable();
     }//GEN-LAST:event_bUpdateMousePressed
 
+    private void bSearchMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bSearchMousePressed
+        // TODO add your handling code here:
+        DefaultTableModel tableModel = null;
+        
+        switch(currentTable) {
+            case "etudiant":
+                tableModel = new DefaultTableModel(DBQueryHelper.getRows(
+                    currentTable, 
+                    new String[]{ 
+                        tIDEtu_SEARCH.getText(), 
+                        tNom_SEARCH.getText(), 
+                        tPrenom_SEARCH.getText(), 
+                        tCIN_SEARCH.getText(),
+                        tAdresse_SEARCH.getText(),
+                        tEmail_SEARCH.getText(),
+                        comboFiliere_SEARCH.getSelectedItem().toString()
+                    }, 
+                    currentAnnee ), 
+                    DBUtilities.getColumns(currentTable, DBUtilities.UPPER_CASE)
+                );
+                break;
+            case "filiere":
+                tableModel = new DefaultTableModel(DBQueryHelper.getRows(
+                    currentTable, 
+                    new String[]{ 
+                        tIDFill_SEARCH.getText(), 
+                        tIntituleFiliere_SEARCH.getText(), 
+                        comboDept_SEARCH.getSelectedItem().toString()
+                    }, 
+                    currentAnnee ), 
+                    DBUtilities.getColumns(currentTable, DBUtilities.UPPER_CASE)
+                );
+                break;
+            case "departement":
+                tableModel = new DefaultTableModel(DBQueryHelper.getRows(
+                    currentTable, 
+                    new String[]{ 
+                        tIDDept_SEARCH.getText(),
+                        tIntituleDept_SEARCH.getText(),
+                        tChef_SEARCH.getText()
+                    }, 
+                    currentAnnee ), 
+                    DBUtilities.getColumns(currentTable, DBUtilities.UPPER_CASE)
+                );
+                break;
+        }
+        
+        myTable.setModel(tableModel);
+        viewChanger(tableView);
+    }//GEN-LAST:event_bSearchMousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -2356,6 +2465,7 @@ public class FHome extends javax.swing.JFrame {
     private javax.swing.JPanel bEtu;
     private javax.swing.JPanel bFil;
     private components.LZButton bInsertView;
+    private components.LZButton bSearchView;
     private javax.swing.JLabel bShowConfirmation;
     private components.LZButton bUpdateView;
     private components.LZComboBox comboAnnees;
@@ -2426,7 +2536,6 @@ public class FHome extends javax.swing.JFrame {
     private javax.swing.JLabel lCountFill;
     private components.LZInputLabel lNotification;
     private components.LZButton lZButton10;
-    private components.LZButton lZButton11;
     private components.LZButton lZButton12;
     private components.LZButton lZButton13;
     private components.LZButton lZButton14;
@@ -2509,20 +2618,20 @@ public class FHome extends javax.swing.JFrame {
     private components.LZTextField tCIN_SEARCH;
     private components.LZTextField tCIN_UPDATE;
     private components.LZTextField tChef_INSERT;
+    private components.LZTextField tChef_SEARCH;
     private components.LZTextField tChef_UPDATE;
-    private components.LZTextField tChef_UPDATE1;
     private components.LZTextField tEmail_INSERT;
     private components.LZTextField tEmail_SEARCH;
     private components.LZTextField tEmail_UPDATE;
+    private components.LZTextField tIDDept_SEARCH;
     private components.LZTextField tIDDept_UPDATE;
-    private components.LZTextField tIDDept_UPDATE1;
     private components.LZTextField tIDEtu_SEARCH;
     private components.LZTextField tIDFiliere_UPDATE;
     private components.LZTextField tIDFill_SEARCH;
     private components.LZTextField tID_UPDATE;
     private components.LZTextField tIntituleDEPT_INSERT;
     private components.LZTextField tIntituleDEPT_UPDATE;
-    private components.LZTextField tIntituleDEPT_UPDATE1;
+    private components.LZTextField tIntituleDept_SEARCH;
     private components.LZTextField tIntituleFiliere_INSERT;
     private components.LZTextField tIntituleFiliere_SEARCH;
     private components.LZTextField tIntituleFiliere_UPDATE;

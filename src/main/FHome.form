@@ -136,7 +136,7 @@
                       <EmptySpace pref="74" max="32767" attributes="0"/>
                       <Component id="bDelete" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
-                      <Component id="lZButton11" min="-2" max="-2" attributes="0"/>
+                      <Component id="bSearchView" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -148,7 +148,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="bInsertView" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="bUpdateView" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lZButton11" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="bSearchView" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="bDelete" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="16" max="32767" attributes="0"/>
@@ -172,7 +172,7 @@
                 <Property name="text" type="java.lang.String" value="Modifier"/>
               </Properties>
             </Component>
-            <Component class="components.LZButton" name="lZButton11">
+            <Component class="components.LZButton" name="bSearchView">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="96" green="68" red="1c" type="rgb"/>
@@ -1081,6 +1081,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Annuler"/>
               </Properties>
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="CancelClickEvent"/>
+              </Events>
             </Component>
             <Component class="components.LZButton" name="lZButton17">
               <Properties>
@@ -1089,6 +1092,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Rechercher"/>
               </Properties>
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="bSearchMousePressed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -1604,6 +1610,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Annuler"/>
               </Properties>
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="CancelClickEvent"/>
+              </Events>
             </Component>
             <Component class="components.LZButton" name="lZButton23">
               <Properties>
@@ -1612,6 +1621,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Rechercher"/>
               </Properties>
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="bSearchMousePressed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -1982,11 +1994,11 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
                               <Component id="lZInputLabel45" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="tIDDept_UPDATE1" alignment="0" max="32767" attributes="0"/>
+                              <Component id="tIDDept_SEARCH" alignment="0" max="32767" attributes="0"/>
                               <Component id="lZInputLabel44" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="tChef_UPDATE1" alignment="0" max="32767" attributes="0"/>
+                              <Component id="tChef_SEARCH" alignment="0" max="32767" attributes="0"/>
                               <Component id="lZInputLabel43" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="tIntituleDEPT_UPDATE1" alignment="0" max="32767" attributes="0"/>
+                              <Component id="tIntituleDept_SEARCH" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace pref="443" max="32767" attributes="0"/>
                       </Group>
@@ -1997,22 +2009,22 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="lZInputLabel45" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="8" pref="8" max="-2" attributes="0"/>
-                          <Component id="tIDDept_UPDATE1" min="-2" max="-2" attributes="0"/>
+                          <Component id="tIDDept_SEARCH" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="8" pref="8" max="-2" attributes="0"/>
                           <Component id="lZInputLabel44" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-                          <Component id="tIntituleDEPT_UPDATE1" min="-2" max="-2" attributes="0"/>
+                          <Component id="tIntituleDept_SEARCH" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="lZInputLabel43" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="tChef_UPDATE1" min="-2" max="-2" attributes="0"/>
+                          <Component id="tChef_SEARCH" min="-2" max="-2" attributes="0"/>
                           <EmptySpace pref="64" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="components.LZTextField" name="tChef_UPDATE1">
+                <Component class="components.LZTextField" name="tChef_SEARCH">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Chef de d&#xe9;partement"/>
                   </Properties>
@@ -2022,7 +2034,7 @@
                     <Property name="text" type="java.lang.String" value="Chef de d&#xe9;partement : "/>
                   </Properties>
                 </Component>
-                <Component class="components.LZTextField" name="tIDDept_UPDATE1">
+                <Component class="components.LZTextField" name="tIDDept_SEARCH">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="L&apos;identifiant"/>
                   </Properties>
@@ -2037,7 +2049,7 @@
                     <Property name="text" type="java.lang.String" value="ID :"/>
                   </Properties>
                 </Component>
-                <Component class="components.LZTextField" name="tIntituleDEPT_UPDATE1">
+                <Component class="components.LZTextField" name="tIntituleDept_SEARCH">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Intitul&#xe9;"/>
                   </Properties>
@@ -2090,6 +2102,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Annuler"/>
               </Properties>
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="CancelClickEvent"/>
+              </Events>
             </Component>
             <Component class="components.LZButton" name="lZButton29">
               <Properties>
@@ -2098,6 +2113,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Rechercher"/>
               </Properties>
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="bSearchMousePressed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
