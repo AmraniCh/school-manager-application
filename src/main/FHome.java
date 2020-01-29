@@ -182,25 +182,25 @@ public class FHome extends javax.swing.JFrame {
         /**
          * Delete selected school year
          */
-//        bDeleteAnnee.addMouseListener(new MouseAdapter() {
-//            @Override
-//            public void mousePressed(MouseEvent e) {
-//                super.mousePressed(e); //To change body of generated methods, choose Tools | Templates.
-//
-//                DBQueryHelper.delete("annee_scolaire", 
-//                        new String[][] { 
-//                            { 
-//                                "annee", 
-//                                comboAnnees.getSelectedItem().toString() 
-//                            } 
-//                        },
-//                        "AND");
-//                fillComboAnnees(); // Fill comboAnnee
-//                comboAnnees.setSelectedIndex(comboAnnees.getItemCount() - 1); // Set last year as selected year
-//                showNotification("L'année scolarité supprimée avec success!"); // Show showNotification
-//                viewChanger(logsView);
-//            }   
-//        });
+        bDeleteAnnee.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                super.mousePressed(e); //To change body of generated methods, choose Tools | Templates.
+
+                DBQueryHelper.delete("annee_scolaire", 
+                        new String[][] { 
+                            { 
+                                "annee", 
+                                comboAnnees.getSelectedItem().toString() 
+                            } 
+                        },
+                        "AND");
+                fillComboAnnees(); // Fill comboAnnee
+                comboAnnees.setSelectedIndex(comboAnnees.getItemCount() - 1); // Set last year as selected year
+                showNotification("L'année scolarité supprimée avec success!"); // Show showNotification
+                viewChanger(logsView);
+            }   
+        });
         
     }
     
@@ -215,7 +215,7 @@ public class FHome extends javax.swing.JFrame {
     private void fillComboAnnees(){
         comboAnnees.removeAllItems();
         String[] rows = DBQueryHelper.getDataByColumn("annee_scolaire", "annee");
-        for (int i = 0; i < rows.length; i++) {
+        for(int i = 0; i < rows.length; i++) {
             comboAnnees.addItem(rows[i]);
         }
     }
@@ -310,6 +310,12 @@ public class FHome extends javax.swing.JFrame {
         lZButton12 = new components.LZButton();
         logsView = new javax.swing.JPanel();
         lZInputLabel1 = new components.LZInputLabel();
+        confirmationPanel = new javax.swing.JPanel();
+        container = new javax.swing.JPanel();
+        lZInputLabel4 = new components.LZInputLabel();
+        bDeleteAnnee = new components.LZButton();
+        lZButton13 = new components.LZButton();
+        lZInputLabel3 = new components.LZInputLabel();
         leftPanel = new javax.swing.JPanel();
         bAccueil = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -346,7 +352,7 @@ public class FHome extends javax.swing.JFrame {
         lZInputLabel2 = new components.LZInputLabel();
         comboAnnees = new components.LZComboBox();
         bAddAnnee = new javax.swing.JLabel();
-        bDeleteAnnee = new javax.swing.JLabel();
+        bShowConfirmation = new javax.swing.JLabel();
 
         components.setBackground(new java.awt.Color(255, 255, 255));
         components.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -448,6 +454,65 @@ public class FHome extends javax.swing.JFrame {
                 .addComponent(lZInputLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(153, 153, 153))
         );
+
+        confirmationPanel.setBackground(new java.awt.Color(255, 255, 255));
+        confirmationPanel.setLayout(new javax.swing.BoxLayout(confirmationPanel, javax.swing.BoxLayout.LINE_AXIS));
+
+        container.setBackground(new java.awt.Color(255, 255, 255));
+
+        lZInputLabel4.setText("Voulez vous vraiment supprimé cette anné scolaire ?");
+        lZInputLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        bDeleteAnnee.setText("Supprimer");
+
+        lZButton13.setBackground(new java.awt.Color(38, 46, 60));
+        lZButton13.setText("Annuler");
+        lZButton13.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                CancelClickEvent(evt);
+            }
+        });
+
+        lZInputLabel3.setText("Toutes les donnés concernant cette année scolaire sera supprimé.");
+        lZInputLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        javax.swing.GroupLayout containerLayout = new javax.swing.GroupLayout(container);
+        container.setLayout(containerLayout);
+        containerLayout.setHorizontalGroup(
+            containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 723, Short.MAX_VALUE)
+            .addGroup(containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(containerLayout.createSequentialGroup()
+                    .addGap(0, 104, Short.MAX_VALUE)
+                    .addGroup(containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lZInputLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(containerLayout.createSequentialGroup()
+                            .addGap(40, 40, 40)
+                            .addComponent(lZInputLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(containerLayout.createSequentialGroup()
+                            .addGap(110, 110, 110)
+                            .addComponent(bDeleteAnnee, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(30, 30, 30)
+                            .addComponent(lZButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGap(0, 104, Short.MAX_VALUE)))
+        );
+        containerLayout.setVerticalGroup(
+            containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 314, Short.MAX_VALUE)
+            .addGroup(containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(containerLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(lZInputLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(17, 17, 17)
+                    .addComponent(lZInputLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(27, 27, 27)
+                    .addGroup(containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(bDeleteAnnee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lZButton13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        confirmationPanel.add(container);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(0, 0));
@@ -828,19 +893,22 @@ public class FHome extends javax.swing.JFrame {
         });
         rightPanel.add(bAddAnnee, new org.netbeans.lib.awtextra.AbsoluteConstraints(273, 9, -1, -1));
 
-        bDeleteAnnee.setFont(new java.awt.Font("Segoe UI Black", 1, 28)); // NOI18N
-        bDeleteAnnee.setForeground(new java.awt.Color(153, 153, 153));
-        bDeleteAnnee.setText("-");
-        bDeleteAnnee.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        bDeleteAnnee.addMouseListener(new java.awt.event.MouseAdapter() {
+        bShowConfirmation.setFont(new java.awt.Font("Segoe UI Black", 1, 28)); // NOI18N
+        bShowConfirmation.setForeground(new java.awt.Color(153, 153, 153));
+        bShowConfirmation.setText("-");
+        bShowConfirmation.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bShowConfirmation.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnMouseExited(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                bShowConfirmationMousePressed(evt);
+            }
         });
-        rightPanel.add(bDeleteAnnee, new org.netbeans.lib.awtextra.AbsoluteConstraints(312, 9, -1, -1));
+        rightPanel.add(bShowConfirmation, new org.netbeans.lib.awtextra.AbsoluteConstraints(312, 9, -1, -1));
 
         getContentPane().add(rightPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 760, 600));
 
@@ -875,6 +943,17 @@ public class FHome extends javax.swing.JFrame {
         // TODO add your handling code here:
         ((JLabel) evt.getSource()).setForeground(new Color(85, 85, 85));
     }//GEN-LAST:event_btnMouseExited
+
+    private void CancelClickEvent(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CancelClickEvent
+        // TODO add your handling code here:
+        viewChanger(this.tableView);
+    }//GEN-LAST:event_CancelClickEvent
+
+    private void bShowConfirmationMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bShowConfirmationMousePressed
+        // TODO add your handling code here:
+        viewChanger(confirmationPanel);
+        setTitleIcon("Suppression d'une année scolaire.", "warning.png");
+    }//GEN-LAST:event_bShowConfirmationMousePressed
 
     /**
      * @param args the command line arguments
@@ -915,12 +994,15 @@ public class FHome extends javax.swing.JFrame {
     private javax.swing.JPanel bAccueil;
     private javax.swing.JLabel bAddAnnee;
     private javax.swing.JLabel bClose;
-    private javax.swing.JLabel bDeleteAnnee;
+    private components.LZButton bDeleteAnnee;
     private javax.swing.JPanel bDep;
     private javax.swing.JPanel bEtu;
     private javax.swing.JPanel bFil;
+    private javax.swing.JLabel bShowConfirmation;
     private components.LZComboBox comboAnnees;
     private javax.swing.JPanel components;
+    private javax.swing.JPanel confirmationPanel;
+    private javax.swing.JPanel container;
     private javax.swing.JPanel contentPanel;
     private javax.swing.JLabel dynamicIcon;
     private javax.swing.JPanel dynamicTable;
@@ -951,6 +1033,7 @@ public class FHome extends javax.swing.JFrame {
     private components.LZButton lZButton10;
     private components.LZButton lZButton11;
     private components.LZButton lZButton12;
+    private components.LZButton lZButton13;
     private components.LZButton lZButton5;
     private components.LZButton lZButton6;
     private components.LZButton lZButton7;
@@ -958,6 +1041,8 @@ public class FHome extends javax.swing.JFrame {
     private components.LZButton lZButton9;
     private components.LZInputLabel lZInputLabel1;
     private components.LZInputLabel lZInputLabel2;
+    private components.LZInputLabel lZInputLabel3;
+    private components.LZInputLabel lZInputLabel4;
     private javax.swing.JPanel leftPanel;
     private javax.swing.JPanel logsView;
     private javax.swing.JPanel notificationPanel;
