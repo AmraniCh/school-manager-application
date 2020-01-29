@@ -66,6 +66,13 @@ public class FHome extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        components = new javax.swing.JPanel();
+        kButton1 = new keeptoo.KButton();
+        kGradientPanel4 = new keeptoo.KGradientPanel();
+        lZButton5 = new components.LZButton();
+        lZButton6 = new components.LZButton();
+        lZButton7 = new components.LZButton();
+        lZButton8 = new components.LZButton();
         leftPanel = new javax.swing.JPanel();
         bAccueil = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -93,9 +100,47 @@ public class FHome extends javax.swing.JFrame {
         lCountFill = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         bClose = new javax.swing.JLabel();
+        contentPanel = new javax.swing.JPanel();
+        dynamicTitle = new javax.swing.JLabel();
+        dynamicIcon = new javax.swing.JLabel();
+
+        components.setBackground(new java.awt.Color(255, 255, 255));
+        components.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        kButton1.setText("kButton1");
+        components.add(kButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 40, -1, -1));
+
+        javax.swing.GroupLayout kGradientPanel4Layout = new javax.swing.GroupLayout(kGradientPanel4);
+        kGradientPanel4.setLayout(kGradientPanel4Layout);
+        kGradientPanel4Layout.setHorizontalGroup(
+            kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 380, Short.MAX_VALUE)
+        );
+        kGradientPanel4Layout.setVerticalGroup(
+            kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 280, Short.MAX_VALUE)
+        );
+
+        components.add(kGradientPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, -1, -1));
+
+        lZButton5.setBackground(new java.awt.Color(28, 104, 150));
+        lZButton5.setText("Rechercher");
+        components.add(lZButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 270, 120, -1));
+
+        lZButton6.setBackground(new java.awt.Color(38, 46, 60));
+        components.add(lZButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 120, 120, -1));
+
+        lZButton7.setBackground(new java.awt.Color(39, 187, 216));
+        lZButton7.setText("Modifier");
+        components.add(lZButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 170, 120, -1));
+
+        lZButton8.setText("Supprimer");
+        components.add(lZButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 220, 120, -1));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocation(new java.awt.Point(0, 0));
         setUndecorated(true);
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         leftPanel.setBackground(new java.awt.Color(233, 78, 135));
@@ -375,11 +420,45 @@ public class FHome extends javax.swing.JFrame {
             }
         });
 
+        contentPanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        dynamicTitle.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        dynamicTitle.setForeground(new java.awt.Color(85, 85, 85));
+        dynamicTitle.setText("Dernière activités");
+
+        dynamicIcon.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        dynamicIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
+        contentPanel.setLayout(contentPanelLayout);
+        contentPanelLayout.setHorizontalGroup(
+            contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentPanelLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(dynamicIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(dynamicTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        contentPanelLayout.setVerticalGroup(
+            contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(contentPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(dynamicIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dynamicTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(345, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout rightPanelLayout = new javax.swing.GroupLayout(rightPanel);
         rightPanel.setLayout(rightPanelLayout);
         rightPanelLayout.setHorizontalGroup(
             rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rightPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(bClose)
+                .addContainerGap())
+            .addGroup(rightPanelLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(kGradientPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(57, 57, 57)
@@ -387,9 +466,8 @@ public class FHome extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                 .addComponent(kGradientPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rightPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(bClose)
+            .addGroup(rightPanelLayout.createSequentialGroup()
+                .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         rightPanelLayout.setVerticalGroup(
@@ -401,7 +479,8 @@ public class FHome extends javax.swing.JFrame {
                     .addComponent(kGradientPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(kGradientPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(kGradientPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(414, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getContentPane().add(rightPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 760, 610));
@@ -479,6 +558,10 @@ public class FHome extends javax.swing.JFrame {
     private javax.swing.JPanel bDep;
     private javax.swing.JPanel bEtu;
     private javax.swing.JPanel bFil;
+    private javax.swing.JPanel components;
+    private javax.swing.JPanel contentPanel;
+    private javax.swing.JLabel dynamicIcon;
+    private javax.swing.JLabel dynamicTitle;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel13;
@@ -493,12 +576,18 @@ public class FHome extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JSeparator jSeparator1;
+    private keeptoo.KButton kButton1;
     private keeptoo.KGradientPanel kGradientPanel1;
     private keeptoo.KGradientPanel kGradientPanel2;
     private keeptoo.KGradientPanel kGradientPanel3;
+    private keeptoo.KGradientPanel kGradientPanel4;
     private javax.swing.JLabel lCountDept;
     private javax.swing.JLabel lCountEtud;
     private javax.swing.JLabel lCountFill;
+    private components.LZButton lZButton5;
+    private components.LZButton lZButton6;
+    private components.LZButton lZButton7;
+    private components.LZButton lZButton8;
     private javax.swing.JPanel leftPanel;
     private javax.swing.JPanel rightPanel;
     // End of variables declaration//GEN-END:variables
