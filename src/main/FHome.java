@@ -11,6 +11,10 @@ import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import javax.swing.table.DefaultTableModel;
+import utilities.DBManager;
+import utilities.DBQueryHelper;
+import utilities.DBUtilities;
 
 /**
  *
@@ -39,6 +43,28 @@ public class FHome extends javax.swing.JFrame {
      */
     public FHome() {
         initComponents();
+        
+        DBManager.setConnection(); // Set database connecion
+        
+        myTable = new LZTable(); // intialize LZTable
+        this.dynamicTable.add(new LZScrollPane(myTable)); // Add LZTable to LZScrollPane
+        
+        viewChanger(this.tableView);
+        
+        fillDataTable();
+        
+    }
+    
+    private void fillDataTable(){ 
+        currentTable = "etudiant";
+        currentAnnee = 2020;
+        System.out.println(DBQueryHelper.getRows(currentTable, currentAnnee)[0][0]);
+        DefaultTableModel tableModel = new DefaultTableModel(
+                DBQueryHelper.getRows(currentTable, currentAnnee),
+                DBUtilities.getColumns(currentTable, DBUtilities.UPPER_CASE));
+        
+        myTable.setModel(tableModel);
+        
     }
     
     /**
@@ -55,6 +81,15 @@ public class FHome extends javax.swing.JFrame {
      */
     private void resetPanelColor(JPanel panel){
         panel.setBackground(new Color(233, 78, 135));
+    }
+    
+    private void viewChanger(JPanel view){
+        
+        this.viewChangerPanel.removeAll();
+        this.viewChangerPanel.add(view);
+        this.viewChangerPanel.revalidate();
+        this.viewChangerPanel.repaint();
+        
     }
 
     /**
@@ -73,6 +108,13 @@ public class FHome extends javax.swing.JFrame {
         lZButton6 = new components.LZButton();
         lZButton7 = new components.LZButton();
         lZButton8 = new components.LZButton();
+        tableView = new javax.swing.JPanel();
+        dynamicTable = new javax.swing.JPanel();
+        tableButtons = new javax.swing.JPanel();
+        lZButton9 = new components.LZButton();
+        lZButton10 = new components.LZButton();
+        lZButton11 = new components.LZButton();
+        lZButton12 = new components.LZButton();
         leftPanel = new javax.swing.JPanel();
         bAccueil = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -103,6 +145,7 @@ public class FHome extends javax.swing.JFrame {
         contentPanel = new javax.swing.JPanel();
         dynamicTitle = new javax.swing.JLabel();
         dynamicIcon = new javax.swing.JLabel();
+        viewChangerPanel = new javax.swing.JPanel();
 
         components.setBackground(new java.awt.Color(255, 255, 255));
         components.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -137,6 +180,51 @@ public class FHome extends javax.swing.JFrame {
         lZButton8.setText("Supprimer");
         components.add(lZButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 220, 120, -1));
 
+        tableView.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        dynamicTable.setBackground(new java.awt.Color(255, 204, 102));
+        dynamicTable.setLayout(new java.awt.BorderLayout());
+        tableView.add(dynamicTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, 240));
+
+        lZButton9.setBackground(new java.awt.Color(38, 46, 60));
+
+        lZButton10.setBackground(new java.awt.Color(39, 187, 216));
+        lZButton10.setText("Modifier");
+
+        lZButton11.setBackground(new java.awt.Color(28, 104, 150));
+        lZButton11.setText("Rechercher");
+
+        lZButton12.setText("Supprimer");
+
+        javax.swing.GroupLayout tableButtonsLayout = new javax.swing.GroupLayout(tableButtons);
+        tableButtons.setLayout(tableButtonsLayout);
+        tableButtonsLayout.setHorizontalGroup(
+            tableButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tableButtonsLayout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(lZButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43)
+                .addComponent(lZButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
+                .addComponent(lZButton12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addComponent(lZButton11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21))
+        );
+        tableButtonsLayout.setVerticalGroup(
+            tableButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tableButtonsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(tableButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lZButton9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lZButton10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lZButton11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lZButton12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+
+        tableView.add(tableButtons, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 710, 60));
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(0, 0));
         setUndecorated(true);
@@ -144,6 +232,7 @@ public class FHome extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         leftPanel.setBackground(new java.awt.Color(233, 78, 135));
+        leftPanel.setPreferredSize(new java.awt.Dimension(240, 580));
 
         bAccueil.setBackground(new java.awt.Color(233, 78, 135));
         bAccueil.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -283,12 +372,12 @@ public class FHome extends javax.swing.JFrame {
                 .addComponent(bDep, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bFil, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
                 .addComponent(jLabel10)
                 .addContainerGap())
         );
 
-        getContentPane().add(leftPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        getContentPane().add(leftPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 560));
 
         rightPanel.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -429,25 +518,31 @@ public class FHome extends javax.swing.JFrame {
         dynamicIcon.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         dynamicIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
+        viewChangerPanel.setLayout(new java.awt.BorderLayout());
+
         javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
         contentPanel.setLayout(contentPanelLayout);
         contentPanelLayout.setHorizontalGroup(
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentPanelLayout.createSequentialGroup()
+            .addGroup(contentPanelLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addComponent(dynamicIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(dynamicTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(viewChangerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(contentPanelLayout.createSequentialGroup()
+                        .addComponent(dynamicIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(dynamicTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 668, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         contentPanelLayout.setVerticalGroup(
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(contentPanelLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(dynamicIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dynamicTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(345, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(viewChangerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 338, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout rightPanelLayout = new javax.swing.GroupLayout(rightPanel);
@@ -561,6 +656,7 @@ public class FHome extends javax.swing.JFrame {
     private javax.swing.JPanel components;
     private javax.swing.JPanel contentPanel;
     private javax.swing.JLabel dynamicIcon;
+    private javax.swing.JPanel dynamicTable;
     private javax.swing.JLabel dynamicTitle;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -584,11 +680,18 @@ public class FHome extends javax.swing.JFrame {
     private javax.swing.JLabel lCountDept;
     private javax.swing.JLabel lCountEtud;
     private javax.swing.JLabel lCountFill;
+    private components.LZButton lZButton10;
+    private components.LZButton lZButton11;
+    private components.LZButton lZButton12;
     private components.LZButton lZButton5;
     private components.LZButton lZButton6;
     private components.LZButton lZButton7;
     private components.LZButton lZButton8;
+    private components.LZButton lZButton9;
     private javax.swing.JPanel leftPanel;
     private javax.swing.JPanel rightPanel;
+    private javax.swing.JPanel tableButtons;
+    private javax.swing.JPanel tableView;
+    private javax.swing.JPanel viewChangerPanel;
     // End of variables declaration//GEN-END:variables
 }
