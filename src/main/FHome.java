@@ -36,7 +36,7 @@ public class FHome extends javax.swing.JFrame {
      * Specify current table 
      */
     public static String currentTable;
-    public static int currentAnnee = 2020;
+    public static int currentAnnee;
     /**
      * Timer for notifications
      */
@@ -56,13 +56,11 @@ public class FHome extends javax.swing.JFrame {
         myTable = new LZTable(); // intialize LZTable
         this.dynamicTable.add(new LZScrollPane(myTable)); // Add LZTable to LZScrollPane
         
-        updateCounters(); // Update counters
-        
         fillComboAnnees();
         
         comboAnnees.setSelectedIndex(comboAnnees.getItemCount() - 1); // Set last school year
-        
         currentAnnee = Integer.parseInt(comboAnnees.getSelectedItem().toString()); // Set currentAnnee gloabal variable
+        updateCounters(); // Update counters
         
         viewChanger(this.logsView);
         
@@ -175,7 +173,8 @@ public class FHome extends javax.swing.JFrame {
                 DBQueryHelper.insert("annee_scolaire", new String[][] { { null } });
                 showNotification("L'année scolarité ajoutée avec success!"); // Show showNotification
                 fillComboAnnees();
-                //comboAnnees.setSelectedIndex(comboAnnees.getItemCount() - 1);
+                comboAnnees.setSelectedIndex(comboAnnees.getItemCount() - 1);
+                
             }   
         });
         
@@ -198,7 +197,11 @@ public class FHome extends javax.swing.JFrame {
                 fillComboAnnees(); // Fill comboAnnee
                 comboAnnees.setSelectedIndex(comboAnnees.getItemCount() - 1); // Set last year as selected year
                 showNotification("L'année scolarité supprimée avec success!"); // Show showNotification
+                
+                // Logs view
                 viewChanger(logsView);
+                // Change Title & Icon
+                setTitleIcon("Dernière activités", "history.png");
             }   
         });
         
@@ -686,7 +689,7 @@ public class FHome extends javax.swing.JFrame {
 
         dynamicTable.setBackground(new java.awt.Color(255, 204, 102));
         dynamicTable.setLayout(new java.awt.BorderLayout());
-        tableView.add(dynamicTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 730, 220));
+        tableView.add(dynamicTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, 220));
 
         tableButtons.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -705,15 +708,13 @@ public class FHome extends javax.swing.JFrame {
         tableButtonsLayout.setHorizontalGroup(
             tableButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tableButtonsLayout.createSequentialGroup()
-                .addGap(32, 32, 32)
                 .addComponent(bInsertView, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(62, 62, 62)
+                .addGap(84, 84, 84)
                 .addComponent(bUpdateView, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
                 .addComponent(bDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54)
-                .addComponent(bSearchView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43))
+                .addGap(71, 71, 71)
+                .addComponent(bSearchView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         tableButtonsLayout.setVerticalGroup(
             tableButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -727,28 +728,13 @@ public class FHome extends javax.swing.JFrame {
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
-        tableView.add(tableButtons, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 730, 60));
+        tableView.add(tableButtons, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 710, 60));
 
         logsView.setBackground(new java.awt.Color(255, 255, 255));
+        logsView.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lZInputLabel1.setText("Dernière activités");
-
-        javax.swing.GroupLayout logsViewLayout = new javax.swing.GroupLayout(logsView);
-        logsView.setLayout(logsViewLayout);
-        logsViewLayout.setHorizontalGroup(
-            logsViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(logsViewLayout.createSequentialGroup()
-                .addGap(239, 239, 239)
-                .addComponent(lZInputLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(249, Short.MAX_VALUE))
-        );
-        logsViewLayout.setVerticalGroup(
-            logsViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, logsViewLayout.createSequentialGroup()
-                .addContainerGap(169, Short.MAX_VALUE)
-                .addComponent(lZInputLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(153, 153, 153))
-        );
+        logsView.add(lZInputLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, -1, -1));
 
         confirmationPanel.setBackground(new java.awt.Color(255, 255, 255));
         confirmationPanel.setLayout(new javax.swing.BoxLayout(confirmationPanel, javax.swing.BoxLayout.LINE_AXIS));
