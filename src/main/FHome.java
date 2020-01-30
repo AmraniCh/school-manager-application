@@ -6,20 +6,19 @@
 package main;
 
 import components.*;
+import utilities.*;
+import modules.*;
+
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
-
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
-import utilities.DBManager;
-import utilities.DBQueryHelper;
-import utilities.DBUtilities;
 
 /**
  *
@@ -50,6 +49,15 @@ public class FHome extends javax.swing.JFrame {
         initComponents();
 
         DBManager.setConnection(); // Set database connecion
+        
+        currentTable = "etudiant";
+        
+        
+        Log l = new Log("delete", currentTable, "chakir");
+        
+        for( Log log: l.loadLogs() ){
+            System.out.println(log.getID());
+        }
         
         notificationPanel.setVisible(false); // Hide norification panel for first time
         
@@ -476,7 +484,6 @@ public class FHome extends javax.swing.JFrame {
         bSearchView = new components.LZButton();
         bDelete = new components.LZButton();
         logsView = new javax.swing.JPanel();
-        lZInputLabel1 = new components.LZInputLabel();
         confirmationPanel = new javax.swing.JPanel();
         container = new javax.swing.JPanel();
         lZInputLabel4 = new components.LZInputLabel();
@@ -733,9 +740,6 @@ public class FHome extends javax.swing.JFrame {
 
         logsView.setBackground(new java.awt.Color(255, 255, 255));
         logsView.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lZInputLabel1.setText("Dernière activités");
-        logsView.add(lZInputLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, -1, -1));
 
         confirmationPanel.setBackground(new java.awt.Color(255, 255, 255));
         confirmationPanel.setLayout(new javax.swing.BoxLayout(confirmationPanel, javax.swing.BoxLayout.LINE_AXIS));
@@ -2209,7 +2213,7 @@ public class FHome extends javax.swing.JFrame {
 
     private void btnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMouseEntered
         // TODO add your handling code here:
-        ((JLabel) evt.getSource()).setForeground(new Color(255, 120, 172));
+        ((JLabel) evt.getSource()).setForeground(CustomColors.SECONDARY);
 
     }//GEN-LAST:event_btnMouseEntered
 
@@ -2527,7 +2531,6 @@ public class FHome extends javax.swing.JFrame {
     private components.LZButton lZButton6;
     private components.LZButton lZButton7;
     private components.LZButton lZButton8;
-    private components.LZInputLabel lZInputLabel1;
     private components.LZInputLabel lZInputLabel10;
     private components.LZInputLabel lZInputLabel11;
     private components.LZInputLabel lZInputLabel12;
