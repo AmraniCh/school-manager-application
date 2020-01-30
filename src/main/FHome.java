@@ -35,23 +35,23 @@ public class FHome extends javax.swing.JFrame {
     /**
      * Specify current table 
      */
-    public static String currentTable;
-    public static int currentAnnee;
+    private static String currentTable;
+    private static int currentAnnee;
     /**
      * Timer for notifications
      */
-    Timer timer;
-    int timerSeconds = 3;
+    private Timer timer;
+    private int timerSeconds = 3;
 
     /**
      * Creates new form FHome
      */
     public FHome() {
         initComponents();
-        
+
         DBManager.setConnection(); // Set database connecion
         
-        notificationPanel.setVisible(false);
+        notificationPanel.setVisible(false); // Hide norification panel for first time
         
         myTable = new LZTable(); // intialize LZTable
         this.dynamicTable.add(new LZScrollPane(myTable)); // Add LZTable to LZScrollPane
@@ -60,6 +60,7 @@ public class FHome extends javax.swing.JFrame {
         
         comboAnnees.setSelectedIndex(comboAnnees.getItemCount() - 1); // Set last school year
         currentAnnee = Integer.parseInt(comboAnnees.getSelectedItem().toString()); // Set currentAnnee gloabal variable
+        
         updateCounters(); // Update counters
         
         viewChanger(this.logsView);
@@ -373,20 +374,19 @@ public class FHome extends javax.swing.JFrame {
     }
     
     private void showNotification(String message){
-        notificationPanel.setVisible(true);
-        lNotification.setText(message);  
+        notificationPanel.setVisible(true); // Show notification panel
+        lNotification.setText(message);  // Set notification message
 
-        timer = new Timer(500, new ActionListener() {
+        timer = new Timer(this.timerSeconds * 1000, new ActionListener() {
             
             public void actionPerformed(ActionEvent evt) {
-                //...Update the progress bar...
-
+                
+                int t = timerSeconds;
                 timerSeconds--;
                 if (timerSeconds == 0) {
                     notificationPanel.setVisible(false);
                     timer.stop();
-                    timerSeconds = 3;
-                    //...Update the GUI...
+                    timerSeconds = t;
                 }
             }
         

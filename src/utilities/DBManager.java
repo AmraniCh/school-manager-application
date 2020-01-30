@@ -17,7 +17,7 @@ public class DBManager {
     
     public static final String DB_NAME = "annuaire_ens";
     /**
-     * [connection] object initialize with setConnection() function
+     * [connection] object initialize with {@code setConnection} function
      */
     public static Connection connection;
    
@@ -37,7 +37,7 @@ public class DBManager {
             
             System.out.print("Database is connected!");
             
-        }catch(ClassNotFoundException | SQLException e){ 
+        } catch(ClassNotFoundException | SQLException e){ 
             System.out.println("Failed connect to database!" + e.getMessage()); 
         }        
     }
