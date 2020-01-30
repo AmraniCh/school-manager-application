@@ -41,7 +41,7 @@ public class FHome extends javax.swing.JFrame {
      * Timer for notifications
      */
     private Timer timer;
-    private int timerSeconds = 3;
+    private int timerSeconds = 2;
 
     /**
      * Creates new form FHome
@@ -59,7 +59,8 @@ public class FHome extends javax.swing.JFrame {
         fillComboAnnees();
         
         comboAnnees.setSelectedIndex(comboAnnees.getItemCount() - 1); // Set last school year
-        currentAnnee = Integer.parseInt(comboAnnees.getSelectedItem().toString()); // Set currentAnnee gloabal variable
+        if(comboAnnees.getModel().getSize() > 0) 
+            currentAnnee = Integer.parseInt(comboAnnees.getSelectedItem().toString()); // Set currentAnnee gloabal variable
         
         updateCounters(); // Update counters
         
@@ -829,6 +830,7 @@ public class FHome extends javax.swing.JFrame {
 
         lZInputLabel11.setText("Prénom :");
 
+        comboFiliere_INSERT.setEditable(true);
         comboFiliere_INSERT.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         comboFiliere_INSERT.setForeground(new java.awt.Color(85, 85, 85));
         comboFiliere_INSERT.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -970,6 +972,7 @@ public class FHome extends javax.swing.JFrame {
 
         lZInputLabel18.setText("Prénom :");
 
+        comboFiliere_UPDATE.setEditable(true);
         comboFiliere_UPDATE.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         comboFiliere_UPDATE.setForeground(new java.awt.Color(85, 85, 85));
         comboFiliere_UPDATE.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -1116,6 +1119,7 @@ public class FHome extends javax.swing.JFrame {
 
         lZInputLabel25.setText("Prénom :");
 
+        comboFiliere_SEARCH.setEditable(true);
         comboFiliere_SEARCH.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         comboFiliere_SEARCH.setForeground(new java.awt.Color(85, 85, 85));
         comboFiliere_SEARCH.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -1247,6 +1251,7 @@ public class FHome extends javax.swing.JFrame {
 
         lZInputLabel30.setText("ID :");
 
+        comboDept_INSERT.setEditable(true);
         comboDept_INSERT.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         comboDept_INSERT.setForeground(new java.awt.Color(85, 85, 85));
         comboDept_INSERT.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
@@ -1343,6 +1348,7 @@ public class FHome extends javax.swing.JFrame {
 
         lZInputLabel33.setText("ID :");
 
+        comboDept_UPDATE.setEditable(true);
         comboDept_UPDATE.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         comboDept_UPDATE.setForeground(new java.awt.Color(85, 85, 85));
         comboDept_UPDATE.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
@@ -1439,6 +1445,7 @@ public class FHome extends javax.swing.JFrame {
 
         lZInputLabel36.setText("ID :");
 
+        comboDept_SEARCH.setEditable(true);
         comboDept_SEARCH.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         comboDept_SEARCH.setForeground(new java.awt.Color(85, 85, 85));
         comboDept_SEARCH.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
@@ -2098,16 +2105,20 @@ public class FHome extends javax.swing.JFrame {
         rightPanel.add(bClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(732, 0, -1, -1));
 
         contentPanel.setBackground(new java.awt.Color(255, 255, 255));
+        contentPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         dynamicTitle.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         dynamicTitle.setForeground(new java.awt.Color(85, 85, 85));
         dynamicTitle.setText("Dernière activités");
+        contentPanel.add(dynamicTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(72, 0, 678, 40));
 
         dynamicIcon.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         dynamicIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         dynamicIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ressources/dynamicIcons/history.png"))); // NOI18N
+        contentPanel.add(dynamicIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 0, 40, 40));
 
         viewChangerPanel.setLayout(new java.awt.BorderLayout());
+        contentPanel.add(viewChangerPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 51, 710, 280));
 
         notificationPanel.setBackground(new java.awt.Color(255, 120, 173));
 
@@ -2120,53 +2131,25 @@ public class FHome extends javax.swing.JFrame {
             .addGroup(notificationPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lNotification, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(615, Short.MAX_VALUE))
+                .addContainerGap(610, Short.MAX_VALUE))
         );
         notificationPanelLayout.setVerticalGroup(
             notificationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(notificationPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lNotification, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
-        contentPanel.setLayout(contentPanelLayout);
-        contentPanelLayout.setHorizontalGroup(
-            contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(contentPanelLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(contentPanelLayout.createSequentialGroup()
-                        .addComponent(dynamicIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(dynamicTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(contentPanelLayout.createSequentialGroup()
-                        .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(notificationPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(viewChangerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        contentPanelLayout.setVerticalGroup(
-            contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(contentPanelLayout.createSequentialGroup()
-                .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(dynamicIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dynamicTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(viewChangerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(notificationPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        contentPanel.add(notificationPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 710, 40));
 
-        rightPanel.add(contentPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 214, 760, -1));
+        rightPanel.add(contentPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 214, 760, 380));
 
         lZInputLabel2.setText("Année scolaire");
         lZInputLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         rightPanel.add(lZInputLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 11, 123, 34));
 
+        comboAnnees.setEditable(true);
         comboAnnees.setFocusable(false);
         rightPanel.add(comboAnnees, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 10, 101, 36));
 

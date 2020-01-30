@@ -5,8 +5,11 @@
  */
 package components;
 
+import java.awt.Color;
+import java.awt.Dimension;
 import javax.swing.JComboBox;
 import javax.swing.border.*;
+
 /**
  *
  * @author WILL
@@ -18,6 +21,10 @@ public class LZComboBox extends JComboBox{
         this.setBorder( new MatteBorder(0, 0, 2, 0, CustomColors.SECONDARY));
         
         this.setFont(new CustomFont(16));
+        
+        this.setEditable(true);
+        
+        this.setBackground(Color.white);
         
     }
     
