@@ -24,4 +24,12 @@ public class LZInputLabel extends JLabel {
         
     }
     
+    public LZInputLabel(String text){
+        this.setFont(new java.awt.Font("Segoe UI", 0, 16));
+        
+        this.setForeground(new Color(85, 85, 85));
+        
+        this.setText(text);
+    }
+    
 }

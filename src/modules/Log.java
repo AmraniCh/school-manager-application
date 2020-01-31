@@ -45,6 +45,10 @@ public class Log {
     public String getBody() {
         return body;
     }
+    
+    public Log(){
+        
+    }
 
     /**
      * Constructor for loading logs
@@ -72,12 +76,11 @@ public class Log {
             logsFile = new File("activités.txt");
             
             fw = new FileWriter(logsFile, true);
-            loadLogs();
         } catch(Exception ex){
             System.out.println(ex.getMessage());
         }
         
-        updateLogs(this.buildLogString(action, type, object));
+        appendLog(this.buildLogString(action, type, object));
     }
    
     
@@ -107,12 +110,15 @@ public class Log {
             case "filiere":
                prefixBody = "Filière";
                break;
+            case "annee":
+                prefixBody = "L'année scolaire";
+                break;
         }
         
         return "["+this.ID+"] " + this.date + " " + prefixBody + " " + object + " " + suffixBody;
     }
     
-    public void updateLogs(String log){
+    private void appendLog(String log){
         try{
             fw.write(log);
             fw.write("\n");
@@ -123,12 +129,13 @@ public class Log {
         }
     }
    
-    public Log[] loadLogs(){
-        
+    public static Log[] loadLogs(){
         try{
-            Scanner r = new Scanner(logsFile);
+            File f = new File("activités.txt");
             
-            Log[] logs = new Log[this.getFileLinesCount() - 1];
+            Scanner r = new Scanner(f);
+            
+            Log[] logs = new Log[Log.getFileLinesCount() - 1];
             
             int i = 0;
             while(r.hasNextLine()){
@@ -136,10 +143,13 @@ public class Log {
                 
                 int ID = Integer.parseInt(line.split(" ")[0].substring(1, line.split(" ")[0].length() - 1));
                 LocalDate date = LocalDate.parse(line.split(" ")[1]);
-                String body = line.split(" ")[2];
+                String body = "";
+                
+                for (int j = 2; j < line.split(" ").length; j++) {
+                    body += line.split(" ")[j] + " ";
+                }
                 
                 logs[i] = new Log(ID, date, body);
-                //System.out.println(logs[i].getID());
                 i++;
             }
             r.close();
@@ -152,7 +162,7 @@ public class Log {
         return null;
     }
 
-    private int getFileLinesCount(){
+    public static int getFileLinesCount(){
         
         try
         {

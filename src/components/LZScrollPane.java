@@ -14,6 +14,12 @@ import javax.swing.BorderFactory;
  * @author WILL
  */
 public class LZScrollPane extends JScrollPane {
+
+    public LZScrollPane() {
+        this.setBackground(Color.white);
+        
+        this.setBorder(BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+    }
     
     public LZScrollPane(Component comp){
         

@@ -115,5 +115,41 @@ public class DBUtilities {
         return null;
     }
     
+    /**
+     * 
+     * @param tableName
+     * @param columnName target column
+     * @return Return row data as string array
+     */
+    public static String[] getDataByColumn(String tableName, String columnName)
+    {
+        try{
+          
+            String query = "SELECT " + columnName + " FROM " + tableName;
+
+            rs = DBQueryExecuter.excuteQuery(query);
+            
+            rs.last();  
+            
+            String[] data = new String[rs.getRow()];
+
+            rs.beforeFirst();
+            
+            int i = 0;
+            while( rs.next() ){
+              data[i] = rs.getString(1);
+              i++;
+            }
+            
+            return data;
+        } catch(Exception ex){
+            ex.printStackTrace();
+            System.out.println(ex.getMessage());
+        }
+        
+        return null;
+    }
+   
+    
  
 }
