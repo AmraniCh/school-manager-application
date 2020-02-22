@@ -1,16 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/* 
+ * Copyright 2020 EL AMRANI CHAKIR - LAZZARD - 2020.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package utilities;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-/**
- * @author WILL
- */
 public class DBQueryHelper {
     private static PreparedStatement ps;
     private static ResultSet rs;
@@ -105,9 +112,6 @@ public class DBQueryHelper {
                 for (int j = 0; j < rows[i].length; j++) {
                     ps.setString(j + 1, params[i][j]);
                 }
-//                if( i + 1 != params.length ){
-//                    ps.addBatch();
-//                }
             }
            
             if( ps.executeUpdate() > 0 )
@@ -193,7 +197,7 @@ public class DBQueryHelper {
             
             String query = null;
             switch(tableName){
-                case "etudiant":
+                case "etudiant":        
                     query = "select e.* " +
                         "from etudiant e inner join filiere f " +
                         "on e.filiere = f.intitule_fill " +
@@ -257,7 +261,12 @@ public class DBQueryHelper {
         }
     }
     
-    public static String getCount(String tableName, Integer anneScolaire){
+    /**
+     * @param tableName
+     * @param anneScolaire
+     * @return Rows count
+     */
+    public static int getCount(String tableName, Integer anneScolaire){
         
         try{
             
@@ -292,7 +301,7 @@ public class DBQueryHelper {
             rs = DBQueryExecuter.excuteQuery(query);
             
             while(rs.next()){
-                return rs.getString(1);
+                return Integer.parseInt(rs.getString(1));
             }
             
         }catch(Exception ex){
@@ -300,7 +309,7 @@ public class DBQueryHelper {
             System.out.println(ex.getMessage());
         }
         
-        return "";
+        return -1;
     }
     
     /**
@@ -346,65 +355,49 @@ public class DBQueryHelper {
         
         return false;
     }
-
     
-    /**
-     * @param tableName
-     * @param where
-     * @param operator Optional "AND" or "OR"
-     * @return 
-     */
-    /*
-    public static String[] getRow(String tableName, String[][] where, String operator)
+
+    public static String[] getByTable(String tableName, int anneScolaire)
     {
-        try {
-            String query = "SELECT * FROM " + tableName;
-            
-            if( where != null && operator != null ){
-                
-                query += " WHERE ";
-                String[] values = new String[where.length]; // Store key values
-                
-                for(int i = 0; i < where.length; i++)
-                {
-
-                    for( int j = 0; j < where[i].length; j++ )
-                    {
-                        query += where[i][j] + " = ?";
-                        values[i] = String.valueOf(where[i][j + 1]);
-                        break;
-                    }
-                    if( where.length == i + 1 ) // Check if last item
-                        break;
-
-                    query += " AND "; 
-                }
-
-                ps = DBManager.connection.prepareStatement(query);
-                // Setting stored values to prepared statement query
-                for (int i = 0; i < values.length; i++) {
-                    ps.setString(i + 1, values[i]);
-                }  
-                
-            } else{
-                ps = DBManager.connection.prepareStatement(query);
+        try{
+            String query = null;
+            switch(tableName){
+                case "filiere":
+                    query = "select f.intitule_fill " + 
+                            "from filiere f inner join departement d "+
+                            "on f.departement_intitule = d.intitule_dept "+
+                            "inner join annee_departement a " +
+                            "on d.intitule_dept = a.departement " +
+                            "where a.annee = '"+anneScolaire+"'";
+                    break;
+                case "departement":
+                    query = "select departement "+
+                            "from annee_departement "+
+                            "where annee = '"+anneScolaire+"'";
+                    break;
             }
             
-            rs = ps.executeQuery();
+            rs = DBQueryExecuter.excuteQuery(query);
             
-            int cols = DBUtilities.getColumnsCount(tableName);
-            String[] record = new String[cols];
+            rs.last();  
             
-            if( rs.next() ){
-                for (int j = 0; j < cols; j++) {
-                    record[j] = rs.getString( j + 1 );   
-                }
+            String[] data = new String[rs.getRow()];
+
+            rs.beforeFirst();
+            
+            int i = 0;
+            while( rs.next() ){
+              data[i] = rs.getString(1);
+              i++;
             }
             
-            return record;
-        } catch (Exception ex) {
+            return data;
+            
+        }catch(Exception ex){
+            ex.printStackTrace();
             System.out.println(ex.getMessage());
         }
+        
         return null;
-    }*/
+    }
 }

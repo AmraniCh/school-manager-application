@@ -1,7 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/* 
+ * Copyright 2020 EL AMRANI CHAKIR - LAZZARD - 2020.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package modules;
 
@@ -12,13 +22,7 @@ import java.io.LineNumberReader;
 import java.time.LocalDate;
 import java.util.Scanner;
 
-
-/**
- *
- * @author WILL
- */
-public class Log {
-    
+public class Log {  
     private int ID;
     private LocalDate date;
     private String body;
@@ -28,7 +32,11 @@ public class Log {
      */
     private File logsFile;
     private FileWriter fw;
-    private FileReader fr;
+    
+    /**
+     * Log File Name
+     */
+    private final static String logFileName = "logs.txt";
 
     
     /**
@@ -44,10 +52,6 @@ public class Log {
 
     public String getBody() {
         return body;
-    }
-    
-    public Log(){
-        
     }
 
     /**
@@ -73,7 +77,7 @@ public class Log {
         date = LocalDate.now();
         
         try{
-            logsFile = new File("activités.txt");
+            logsFile = new File(Log.logFileName);
             
             fw = new FileWriter(logsFile, true);
         } catch(Exception ex){
@@ -131,7 +135,7 @@ public class Log {
    
     public static Log[] loadLogs(){
         try{
-            File f = new File("activités.txt");
+            File f = new File(Log.logFileName);
             
             Scanner r = new Scanner(f);
             
@@ -166,18 +170,18 @@ public class Log {
         
         try
         {
-           FileReader  input = new FileReader("activités.txt");
-           LineNumberReader count = new LineNumberReader(input);
+            FileReader  input = new FileReader(Log.logFileName);
+            LineNumberReader count = new LineNumberReader(input);
         
-               while (count.skip(Long.MAX_VALUE) > 0)
-               {
-                  // Loop just in case the file is > Long.MAX_VALUE or skip() decides to not read the entire file
-               }
+            while (count.skip(Long.MAX_VALUE) > 0)
+            {
+              // Loop just in case the file is > Long.MAX_VALUE or skip() decides to not read the entire file
+            }
 
-               return count.getLineNumber() + 1;                                    // +1 because line index starts at 0
+            return count.getLineNumber() + 1;                                
             
         } catch(Exception ex){
-            
+            System.out.println("");
         }
         return 0;
     }

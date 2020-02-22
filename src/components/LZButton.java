@@ -1,4 +1,18 @@
-
+/* 
+ * Copyright 2020 EL AMRANI CHAKIR - LAZZARD - 2020.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package components;
 
 import java.awt.Color;
@@ -9,66 +23,29 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.*;
 
-
 public final class LZButton extends JButton{
-      private Color hoverColor;
-      private Color before;
-      
-//    public String EText = "LZButton";
-//    public Color EBackgrondColor = new Color(237, 121, 149);
-//    public Color EForeColor = Color.white;
-//    
-//    private Rectangle2D rect;
-//
-//    public String getEText() {
-//        return EText;
-//    }
-//    
-//    public void setEText(String EText) {
-//        this.EText = EText;
-//    }
-//
-//    public Color getEForeColor() {
-//        return EForeColor;
-//    }
-//
-//    public void setEForeColor(Color EForeColor) {
-//        this.EForeColor = EForeColor;
-//    }
-//
-//    public Color getEBackgrondColor() {
-//        return EBackgrondColor;
-//    }
-//
-//    public void setEBackgrondColor(Color EBackgrondColor) {
-//        this.EBackgrondColor = EBackgrondColor;
-//    }
+    private Color hoverColor;
+    private Color beforeHoverColor;
     
-
-
     public LZButton(){
-        
         this.setBorderPainted(false);
         this.setForeground(Color.white);
         this.setText("Ajouter");
         this.setBackground(new Color(237, 121, 149));
         this.setFocusable(false);
-        this.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        this.setFont(new CustomFont(16));
         this.setSize(120, 35); 
-      
         this.setCursor(new Cursor(Cursor.HAND_CURSOR));
         
         JButton $this = this;
-        
-        
         MouseAdapter mouseAdapter = new MouseAdapter() {
             
             @Override
             public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e); //To change body of generated methods, choose Tools | Templates.
                 hoverColor = $this.getBackground();
-                before = $this.getBackground();
-                $this.setBackground(new Color(85, 85, 85));
+                beforeHoverColor = $this.getBackground();
+                $this.setBackground(CustomColors.BLACK);
             }  
 
             @Override
@@ -80,12 +57,9 @@ public final class LZButton extends JButton{
             @Override
             public void mousePressed(MouseEvent e) {
                 super.mousePressed(e); //To change body of generated methods, choose Tools | Templates.
-                $this.setBackground(before);
+                $this.setBackground(beforeHoverColor);
             }
-            
-            
-            
-           
+                  
         };
          
         addMouseListener(mouseAdapter);

@@ -1,0 +1,89 @@
+[1] 2020-01-30 L'étudiant Nom à été ajouté
+[3] 2020-01-30 L'étudiant Nom à été supprimé
+[4] 2020-01-30 Département Intitulé à été ajouté
+[5] 2020-01-30 L'étudiant Nom à été ajouté
+[6] 2020-01-30 L'étudiant Nom à été ajouté
+[7] 2020-01-30 L'étudiant Nom à été ajouté
+[8] 2020-01-30 Département Intitulé à été modifié
+[9] 2020-01-30 L'étudiant Nom à été supprimé
+[10] 2020-01-30 L'étudiant Nom à été supprimé
+[11] 2020-01-30 L'étudiant Nom à été ajouté
+[12] 2020-01-31 Département Intitulé à été supprimé
+[13] 2020-01-31 Une nouvelle année scolaire null à été ajouté
+[14] 2020-01-31 Une nouvelle année scolaire 2028 à été ajouté
+[15] 2020-01-31 Une nouvelle année scolaire 2027 à été ajouté
+[16] 2020-01-31 Une nouvelle année scolaire 2025 à été supprimé
+[17] 2020-01-31 L'année scolaire 2025 à été supprimé
+[18] 2020-01-31 L'année scolaire 2025 à été supprimé
+[19] 2020-01-31 L'année scolaire 2029 à été ajouté
+[20] 2020-01-31 L'année scolaire 2029 à été supprimé
+[21] 2020-01-31 L'année scolaire 1 à été ajouté
+[22] 2020-01-31 L'année scolaire 2 à été ajouté
+[23] 2020-01-31 L'année scolaire 3 à été ajouté
+[24] 2020-01-31 L'année scolaire 3 à été supprimé
+[25] 2020-01-31 L'année scolaire 2020 à été ajouté
+[26] 2020-01-31 Département Logiciel et développement web à été ajouté
+[27] 2020-01-31 Département Informatique et gestion à été modifié
+[28] 2020-01-31 Filière Logiciel et developpement web à été ajouté
+[29] 2020-01-31 L'étudiant chakir à été ajouté
+[30] 2020-01-31 L'étudiant chakir à été ajouté
+[31] 2020-01-31 L'étudiant chakir à été supprimé
+[32] 2020-01-31 L'étudiant chakir à été ajouté
+[33] 2020-01-31 L'étudiant chakir à été ajouté
+[34] 2020-01-31 L'étudiant chakir à été ajouté
+[35] 2020-01-31 L'étudiant chakir à été supprimé
+[36] 2020-01-31 L'étudiant chakir à été supprimé
+[37] 2020-01-31 L'étudiant chakir à été supprimé
+[38] 2020-01-31 L'étudiant chakir à été modifié
+[39] 2020-01-31 L'année scolaire 2021 à été ajouté
+[40] 2020-01-31 Département Informatique à été ajouté
+[41] 2020-01-31 Filière Intitulé à été ajouté
+[42] 2020-01-31 L'étudiant chakir à été ajouté
+[43] 2020-01-31 L'étudiant chakir à été modifié
+[44] 2020-01-31 L'étudiant chakir à été modifié
+[45] 2020-01-31 Département qsds à été ajouté
+[46] 2020-01-31 L'année scolaire 2021 à été supprimé
+[47] 2020-01-31 L'année scolaire 2022 à été ajouté
+[48] 2020-01-31 L'année scolaire 2022 à été supprimé
+[49] 2020-01-31 L'année scolaire 2021 à été ajouté
+[50] 2020-01-31 Département lll à été ajouté
+[51] 2020-01-31 Filière hhhh à été ajouté
+[52] 2020-01-31 L'étudiant dqsd à été ajouté
+[53] 2020-01-31 Filière aaa à été ajouté
+[54] 2020-01-31 L'étudiant ahmed à été modifié
+[55] 2020-01-31 L'étudiant arrr à été ajouté
+[56] 2020-01-31 Filière Multimedia à été ajouté
+[57] 2020-01-31 L'étudiant aaa à été ajouté
+[58] 2020-01-31 L'étudiant aaa à été modifié
+[59] 2020-01-31 L'étudiant ahmed à été supprimé
+[60] 2020-01-31 L'étudiant aaa à été supprimé
+[61] 2020-01-31 L'étudiant chakir à été supprimé
+[62] 2020-01-31 L'étudiant chakir à été modifié
+[63] 2020-01-31 L'étudiant ahmed à été ajouté
+[64] 2020-01-31 L'étudiant Safwane à été ajouté
+[65] 2020-01-31 L'année scolaire 2021 à été supprimé
+[66] 2020-01-31 L'année scolaire 2022 à été ajouté
+[67] 2020-01-31 L'année scolaire 2023 à été ajouté
+[68] 2020-01-31 Département qsdqs à été ajouté
+[69] 2020-01-31 Filière dqsd à été ajouté
+[70] 2020-01-31 L'étudiant dqsd à été ajouté
+[71] 2020-01-31 L'étudiant chakir à été modifié
+[72] 2020-01-31 L'étudiant chakir à été supprimé
+[73] 2020-01-31 L'étudiant dqsd à été ajouté
+[74] 2020-02-05 L'étudiant ahmed à été supprimé
+[75] 2020-02-11 L'année scolaire 2020 à été ajouté
+[76] 2020-02-22 L'année scolaire 2021 à été ajouté
+[77] 2020-02-22 Département Logiciels et dev web à été ajouté
+[78] 2020-02-22 Filière LL à été ajouté
+[79] 2020-02-22 L'étudiant dfds à été ajouté
+[80] 2020-02-22 L'année scolaire 2021 à été supprimé
+[81] 2020-02-22 Département qsdqs à été ajouté
+[82] 2020-02-22 L'année scolaire 2020 à été supprimé
+[83] 2020-02-22 L'année scolaire 2022 à été ajouté
+[84] 2020-02-22 L'année scolaire 2022 à été supprimé
+[85] 2020-02-22 L'année scolaire 2023 à été ajouté
+[86] 2020-02-22 L'année scolaire 2023 à été supprimé
+[87] 2020-02-22 L'année scolaire 2024 à été ajouté
+[88] 2020-02-22 Département Intitulé à été ajouté
+[89] 2020-02-22 Filière Intitulé à été ajouté
+[90] 2020-02-22 L'étudiant Nom à été ajouté

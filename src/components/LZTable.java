@@ -1,68 +1,34 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/* 
+ * Copyright 2020 EL AMRANI CHAKIR - LAZZARD - 2020.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package components;
 import java.awt.Color;
 import javax.swing.*;
 
-/**
- *
- * @author WILL
- */
 public class LZTable extends JTable {
     
     public LZTable(){
         this.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-
-        this.setFont(new java.awt.Font("Segoe UI", 0, 15));
-        
-        this.setGridColor(new java.awt.Color(255, 255, 255));
-
+        this.setFont(new CustomFont(15));
+        this.setGridColor(Color.white);
         this.setRowHeight(40);
-
         this.setRowMargin(0);
-
-        this.setSelectionBackground(new java.awt.Color(255, 120, 172));
-                
-        this.setBackground(Color.white);
-        
+        this.setSelectionBackground(CustomColors.SECONDARY);           
+        this.setBackground(Color.white);  
         this.setShowGrid(false);
-        
         this.setFillsViewportHeight(true);
     }
-    
-//    public LZTable(String[] cols, Object[][] rows){
-//
-//        this.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-//
-//        this.setFont(new java.awt.Font("Segoe UI", 0, 14));
-//        
-//        this.setModel(new javax.swing.table.DefaultTableModel(rows, cols) {
-//            Class[] types = new Class [] {
-//                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-//            };
-//
-//            public Class getColumnClass(int columnIndex) {
-//                return types [columnIndex];
-//            }
-//        });
-//
-//        this.setGridColor(new java.awt.Color(255, 255, 255));
-//
-//        this.setRowHeight(40);
-//
-//        this.setRowMargin(0);
-//
-//        this.setSelectionBackground(new java.awt.Color(255, 120, 172));
-//                
-//        this.setBackground(Color.white);
-//
-//        this.setShowGrid(false); 
-//        
-//        
-//    }
-    
     
 }

@@ -1,7 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/* 
+ * Copyright 2020 EL AMRANI CHAKIR - LAZZARD - 2020.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package main;
 
@@ -10,8 +20,6 @@ import utilities.*;
 import modules.*;
 
 import java.awt.Color;
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -20,33 +28,22 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-/**
- *
- * @author WILL
- */
 public class FHome extends javax.swing.JFrame {
-    
     /**
-     * Global vars
+     * Global Vars
      */
     private JPanel selectedMenuPanel;
     private LZTable myTable;
-    /**
-     * Specify current table 
-     */
     private static String currentTable;
     private static int currentAnnee;
     /**
      * Timer for notifications
      */
     private Timer timer;
-    private int timerSeconds = 2;
+    private int timerSeconds = 2; // Timer seconds display
 
     /**
      * Creates new form FHome
@@ -56,12 +53,9 @@ public class FHome extends javax.swing.JFrame {
 
         DBManager.setConnection(); // Set database connecion
         
-        currentTable = null;
+        viewChanger(this.logsView); // Call first view
         
-        viewChanger(this.logsView);
-        
-        // Update Logs
-        updateLogs();
+        updateLogs(); // Update Logs
        
         notificationPanel.setVisible(false); // Hide norification panel for first time
         
@@ -69,15 +63,18 @@ public class FHome extends javax.swing.JFrame {
         this.dynamicTable.add(new LZScrollPane(myTable)); // Add LZTable to LZScrollPane
         
         fillComboAnnees();
-        
-        comboAnnees.setSelectedIndex(comboAnnees.getItemCount() - 1); // Set last school year
-        if(comboAnnees.getModel().getSize() > 0) 
+        if(comboAnnees.getModel().getSize() > 0) {
             currentAnnee = Integer.parseInt(comboAnnees.getSelectedItem().toString()); // Set currentAnnee gloabal variable
+            comboAnnees.setSelectedIndex(comboAnnees.getItemCount() - 1); // Set last school year
+        }     
         
         updateCounters(); // Update counters
 
         FHome form = this; // Store actual form to use in mouse adapter interface
-
+        
+        /**
+         * Menu Click Items
+         */
         bAccueil.addMouseListener(new MouseAdapter() {
             
             @Override
@@ -215,7 +212,7 @@ public class FHome extends javax.swing.JFrame {
                     new Log("delete", "annee", comboAnnees.getSelectedItem().toString());
                     fillComboAnnees(); // Fill comboAnnee
                     comboAnnees.setSelectedIndex(comboAnnees.getItemCount() - 1); // Set last year as selected year
-                    showNotification("L'année scolarité supprimée avec success!"); // Show showNotification
+                    showNotification("L'année scolaire supprimée avec success!"); // Show showNotification
                     viewChanger(logsView); // Logs view
                     setTitleIcon("Dernière activités", "history.png"); // Change Title & Icon
                     updateLogs();
@@ -269,7 +266,7 @@ public class FHome extends javax.swing.JFrame {
                     case "filiere":
                         viewChanger(form.insertFiliereView);
                         fillComboDept();
-                        break; 
+                        break;
                     case "departement":
                         viewChanger(form.insertDepartementView);
                         break;
@@ -351,7 +348,6 @@ public class FHome extends javax.swing.JFrame {
     }
     
     private void updateLogs(){
-        //this.LogsScrollPane.setLayout(new GridLayout(Log.getFileLinesCount(), 1, 10, 10));
         LogsScrollPane.setLayout(new BoxLayout(LogsScrollPane, BoxLayout.Y_AXIS));
         this.LogsScrollPane.removeAll();
         for( Log log: Log.loadLogs() ){
@@ -362,9 +358,9 @@ public class FHome extends javax.swing.JFrame {
     
     private void updateCounters(){
         
-        lCountEtud.setText(DBQueryHelper.getCount("etudiant", currentAnnee));
-        lCountDept.setText(DBQueryHelper.getCount("departement", currentAnnee));
-        lCountFill.setText(DBQueryHelper.getCount("filiere", currentAnnee));
+        lCountEtud.setText(String.valueOf(DBQueryHelper.getCount("etudiant", currentAnnee)));
+        lCountDept.setText(String.valueOf(DBQueryHelper.getCount("departement", currentAnnee)));
+        lCountFill.setText(String.valueOf(DBQueryHelper.getCount("filiere", currentAnnee)));
   
     }
     
@@ -463,7 +459,7 @@ public class FHome extends javax.swing.JFrame {
         comboFiliere_UPDATE.removeAllItems();
         comboFiliere_SEARCH.removeAllItems();
 
-        String[] rows = DBUtilities.getDataByColumn("filiere", "intitule_fill");
+        String[] rows = DBQueryHelper.getByTable("filiere", currentAnnee);
         for(int i = 0; i < rows.length; i++) {
             comboFiliere_INSERT.addItem(rows[i]);
             comboFiliere_UPDATE.addItem(rows[i]);
@@ -475,7 +471,7 @@ public class FHome extends javax.swing.JFrame {
         comboDept_INSERT.removeAllItems();
         comboDept_UPDATE.removeAllItems();
 
-        String[] rows = DBUtilities.getDataByColumn("departement", "intitule_dept");
+        String[] rows = DBQueryHelper.getByTable("departement", currentAnnee);
         for(int i = 0; i < rows.length; i++) {
             comboDept_INSERT.addItem(rows[i]);
             comboDept_UPDATE.addItem(rows[i]);
@@ -800,7 +796,7 @@ public class FHome extends javax.swing.JFrame {
             }
         });
 
-        lZInputLabel3.setText("Toutes les donnés concernant cette année scolaire sera supprimé.");
+        lZInputLabel3.setText("Toutes les donnés concernant cette année scolaire seront supprimées.");
         lZInputLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         javax.swing.GroupLayout containerLayout = new javax.swing.GroupLayout(container);
@@ -810,7 +806,7 @@ public class FHome extends javax.swing.JFrame {
             .addGap(0, 723, Short.MAX_VALUE)
             .addGroup(containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(containerLayout.createSequentialGroup()
-                    .addGap(0, 104, Short.MAX_VALUE)
+                    .addGap(0, 87, Short.MAX_VALUE)
                     .addGroup(containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(lZInputLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(containerLayout.createSequentialGroup()
@@ -821,7 +817,7 @@ public class FHome extends javax.swing.JFrame {
                             .addComponent(bDeleteAnnee, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(30, 30, 30)
                             .addComponent(lZButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGap(0, 104, Short.MAX_VALUE)))
+                    .addGap(0, 86, Short.MAX_VALUE)))
         );
         containerLayout.setVerticalGroup(
             containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
