@@ -1,6 +1,8 @@
-# Mini School Management Application - Java
+# school-manager-application
 
-Mini School Management Application developed With Java Swing.
+## Description 
+
+A school manager Application developed with Java Swing.
 
 ![](https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/249e8992662489.5e50b41ac6d05.png).
 
